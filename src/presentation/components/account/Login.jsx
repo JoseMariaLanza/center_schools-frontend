@@ -15,6 +15,8 @@ import MenuItem from '@mui/material/MenuItem';
 import Tooltip from '@mui/material/Tooltip';
 import Avatar from '@mui/material/Avatar';
 
+import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 export default function FormDialog() {
@@ -42,6 +44,13 @@ export default function FormDialog() {
         <div>
             {!isLoggedIn ?
                 <>
+                    {/* <AccountCircleOutlinedIcon onClick={handleClickOpen}
+                        sx={{
+                            fontSize: '3rem'
+                        }}
+                    >
+                        Login
+                    </AccountCircleOutlinedIcon> */}
                     <Button variant="outlined" onClick={handleClickOpen}>
                         Login
                     </Button>

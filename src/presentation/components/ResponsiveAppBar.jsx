@@ -13,11 +13,11 @@ import AdbIcon from '@mui/icons-material/Adb';
 
 import { createTheme } from '@mui/material/styles';
 
-// import Login from '@components/account/Login'
 import Login from './account/Login'
 import { NavLink } from 'react-router-dom';
+import logo from '../assets/images/logos/logoITF.png'
+import { Icon } from '@mui/material';
 
-// const pages = ['Inicio', 'Escuelas', 'Historia', 'Noticias'];
 const pages = [
     {
         text: 'Home',
@@ -69,7 +69,11 @@ const ResponsiveAppBar = () => {
         <AppBar theme={theme} position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} />
+                    {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
+                    <Icon sx={{
+                        display: { xs: 'none', md: 'flex' }, mr: 1, fontSize: '3rem' }} >
+                        <img src={logo} alt="I.T.F." />
+                    </Icon>
                     <Typography
                         variant="h6"
                         noWrap
@@ -124,7 +128,10 @@ const ResponsiveAppBar = () => {
                             ))}
                         </Menu>
                     </Box>
-                    <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
+                    {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
+                    <Icon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1, fontSize: '3rem' }} >
+                        <img src={logo} alt="I.T.F." />
+                    </Icon>
                     <Typography
                         variant="h5"
                         noWrap
@@ -143,24 +150,27 @@ const ResponsiveAppBar = () => {
                     >
                         A.E.C
                     </Typography>
-                    <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                    <Box sx={{
+                        flexGrow: 1,
+                        display: { xs: 'none', md: 'flex' },
+                    }}>
                         {pages.map((page) => (
                             <Button
+                                component={NavLink}
                                 key={page.key}
+                                to={page.route}
                                 onClick={handleCloseNavMenu}
-                                sx={{ margin: '0', padding: '0' }}
+                                style={({ isActive }) => ({
+                                    margin: '0',
+                                    padding: '0',
+                                    width: '5rem',
+                                    height: '4rem',
+                                    color: isActive ? '#fff' : '#545e6f',
+                                    background: isActive ? '#4D4D4E' : '#fff',
+                                    borderRadius: 0,
+                                })}
                             >
-                                <NavLink
-                                    to={page.route}
-                                    style={({ isActive }) => ({
-                                        width: '5rem',
-                                        color: isActive ? '#fff' : '#545e6f',
-                                        background: isActive ? '#4D4D4E' : '#fff',
-                                        textDecoration: 'none',
-                                    })}
-                                >
-                                    {page.text}
-                                </NavLink>
+                                {page.text}
                             </Button>
                         ))}
                     </Box>
@@ -171,18 +181,3 @@ const ResponsiveAppBar = () => {
     );
 };
 export default ResponsiveAppBar;
-
-
-
-{/* <Button
-                                // to={page.route}
-                                key={page.key}
-                                onClick={handleCloseNavMenu}
-                                sx={{ my: 2, color: '#4D4D4E', display: 'block' }}
-                            >
-                                <NavLink
-                                    to={page.route}
-                                >
-                                    {page.text}
-                                </NavLink>
-                            </Button> */}

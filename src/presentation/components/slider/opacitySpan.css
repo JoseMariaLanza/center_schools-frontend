@@ -1,0 +1,12 @@
+.opacity__span {
+    display: flex;
+    background-color: rgba(0, 0, 0, .1);
+    /* position: bottom; */
+    /* align-content: center; */
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    position: inherit;
+    height: fit-content;
+    /* width: inherit; */
+}

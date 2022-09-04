@@ -9,7 +9,6 @@ import MenuIcon from '@mui/icons-material/Menu';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
 import MenuItem from '@mui/material/MenuItem';
-import AdbIcon from '@mui/icons-material/Adb';
 
 import { createTheme } from '@mui/material/styles';
 
@@ -69,7 +68,6 @@ const ResponsiveAppBar = () => {
         <AppBar theme={theme} position="static">
             <Container maxWidth="xl">
                 <Toolbar disableGutters>
-                    {/* <AdbIcon sx={{ display: { xs: 'none', md: 'flex' }, mr: 1 }} /> */}
                     <Icon sx={{
                         display: { xs: 'none', md: 'flex' }, mr: 1, fontSize: '3rem' }} >
                         <img src={logo} alt="I.T.F." />

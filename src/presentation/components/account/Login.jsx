@@ -16,6 +16,9 @@ import Tooltip from '@mui/material/Tooltip';
 import Avatar from '@mui/material/Avatar';
 
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
+import { createTheme } from '@mui/material/styles';
+
+import { LoginService } from '../../../domain/services/auth/LoginService';
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -23,9 +26,15 @@ export default function FormDialog() {
     const isLoggedIn = false;
     const [open, setOpen] = useState(false);
     const [anchorElUser, setAnchorElUser] = useState(null);
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     const handleClickOpen = () => {
         setOpen(true);
+    };
+
+    const handleLogin = async () => {
+        await LoginService(email, password);
     };
 
     const handleClose = () => {
@@ -40,19 +49,35 @@ export default function FormDialog() {
         setAnchorElUser(null);
     };
 
+    const theme = createTheme({
+        palette: {
+            primary: {
+                light: '#fff',
+                main: 'white',
+                dark: '#002884',
+                contrastText: '#4D4D4E',
+            }
+        },
+    });
+
     return (
         <div>
             {!isLoggedIn ?
                 <>
-                    {/* <AccountCircleOutlinedIcon onClick={handleClickOpen}
+                    <Button
                         sx={{
-                            fontSize: '3rem'
+                            borderRadius: '100%',
+                            color: '#4D4D4E'
                         }}
+                        onClick={handleClickOpen}
                     >
-                        Login
-                    </AccountCircleOutlinedIcon> */}
-                    <Button variant="outlined" onClick={handleClickOpen}>
-                        Login
+                        <AccountCircleOutlinedIcon
+                            sx={{
+                                fontSize: '3rem',
+                                borderRadius: '100%',
+                                color: 'inherit'
+                            }}
+                        />
                     </Button>
                     <Dialog open={open} onClose={handleClose}>
                         <DialogTitle>Login</DialogTitle>
@@ -68,6 +93,8 @@ export default function FormDialog() {
                                 type="email"
                                 fullWidth
                                 variant="standard"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
                             />
                             <TextField
                                 margin="dense"
@@ -76,10 +103,12 @@ export default function FormDialog() {
                                 type="password"
                                 fullWidth
                                 variant="standard"
+                                value={password}
+                                onChange={(e) => setPassword(e.target.value)}
                             />
                         </DialogContent>
                         <DialogActions>
-                            <Button onClick={handleClose}>Login</Button>
+                            <Button onClick={handleLogin}>Login</Button>
                             <Button onClick={handleClose}>Cancel</Button>
                         </DialogActions>
                     </Dialog>

@@ -1,12 +1,32 @@
 import React from 'react'
-// import Slider from '@components/Slider'
-import Slider from '../components/Slider'
+import Slider from '../components/slider/Slider'
+// import images from '../exports/images'
+import Banner from '../components/banner/Banner'
+import NewsCard from '../components/cards/NewsCard'
+import ImageList from '../components/images/imageList/ImageList'
+
+import '../assets/styles/headContainer.css'
+import '../components/images/imageList/imageList.css'
+import '../assets/styles/styles.css'
 
 const Home = () => {
   return (
     <>
-      <div>Home</div>
-      <Slider />
+      <div className='container'>
+        <div className='head__container'>
+          <Slider sx={{
+            gridArea: '1 / 1 / 2 / 2'
+          }} />
+          <div className='image__list'>
+            <ImageList />
+            <span>
+              view gallery
+            </span>
+          </div>
+        </div>
+      </div>
+      <Banner />
+      <NewsCard />
     </>
   )
 }

@@ -2,7 +2,7 @@ import React from 'react'
 // import fondo2 from '../assets/images/maqueta/image 2.png';
 import { Link } from "react-router-dom";
 
-const BannerPub = () => {
+const Banner = () => {
     return (
         <>
             <article className="institucional__bg-start bg-fullpage foto" aria-label="Presentación de Institucional de Tensolite">
@@ -19,4 +19,4 @@ const BannerPub = () => {
     )
 }
 
-export default BannerPub
+export default Banner

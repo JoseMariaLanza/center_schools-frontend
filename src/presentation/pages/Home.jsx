@@ -24,9 +24,9 @@ const Home = () => {
             </span>
           </div>
         </div>
+        <Banner />
+        <NewsCard />
       </div>
-      <Banner />
-      <NewsCard />
     </>
   )
 }

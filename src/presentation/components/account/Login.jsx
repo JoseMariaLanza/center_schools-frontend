@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -16,25 +16,37 @@ import Tooltip from '@mui/material/Tooltip';
 import Avatar from '@mui/material/Avatar';
 
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-import { createTheme } from '@mui/material/styles';
+// import { createTheme } from '@mui/material/styles';
 
-import { LoginService } from '../../../domain/services/auth/LoginService';
+// import { LoginService } from '../../../domain/services/auth/LoginService';
+
+// import { store } from '../../../data/redux/store';
+import { useDispatch, useSelector } from 'react-redux';
+import { login, profile } from '../../../data/redux/slices/auth/thunks';
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 export default function FormDialog() {
-    const isLoggedIn = false;
     const [open, setOpen] = useState(false);
     const [anchorElUser, setAnchorElUser] = useState(null);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
+    const dispatch = useDispatch();
+    const { isLoggedIn, token } = useSelector(state => state.auth);
+
     const handleClickOpen = () => {
         setOpen(true);
     };
 
+    useEffect(() => {
+        dispatch(login({ email, password }))
+    }, []);
+
     const handleLogin = async () => {
-        await LoginService(email, password);
+        // await LoginService(email, password);
+        dispatch(login({ email, password }));
+        setOpen(false);
     };
 
     const handleClose = () => {
@@ -49,16 +61,34 @@ export default function FormDialog() {
         setAnchorElUser(null);
     };
 
-    const theme = createTheme({
-        palette: {
-            primary: {
-                light: '#fff',
-                main: 'white',
-                dark: '#002884',
-                contrastText: '#4D4D4E',
-            }
-        },
-    });
+    const handleClickMenuItem = (setting) => {
+        switch (setting) {
+            case 'Profile':
+                dispatch(profile(token))
+                break;
+            case 'Account':
+                // Account
+                break;
+            case 'Logout':
+                // Logout
+                break;
+            default:
+                // Dashboard
+                break;
+        }
+        handleCloseUserMenu()
+    };
+
+    // const theme = createTheme({
+    //     palette: {
+    //         primary: {
+    //             light: '#fff',
+    //             main: 'white',
+    //             dark: '#002884',
+    //             contrastText: '#4D4D4E',
+    //         }
+    //     },
+    // });
 
     return (
         <div>
@@ -136,7 +166,9 @@ export default function FormDialog() {
                         onClose={handleCloseUserMenu}
                     >
                         {settings.map((setting) => (
-                            <MenuItem key={setting} onClick={handleCloseUserMenu}>
+                            <MenuItem key={setting}
+                                onClick={() => handleClickMenuItem(setting)}
+                            >
                                 <Typography textAlign="center">{setting}</Typography>
                             </MenuItem>
                         ))}

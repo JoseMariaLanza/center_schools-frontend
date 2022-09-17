@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -16,13 +16,12 @@ import Tooltip from '@mui/material/Tooltip';
 import Avatar from '@mui/material/Avatar';
 
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
-// import { createTheme } from '@mui/material/styles';
 
-// import { LoginService } from '../../../domain/services/auth/LoginService';
-
-// import { store } from '../../../data/redux/store';
 import { useDispatch, useSelector } from 'react-redux';
 import { login, profile } from '../../../data/redux/slices/auth/thunks';
+import { dashboard } from '../../../data/redux/slices/dashboard/thunks';
+import { NavLink } from 'react-router-dom';
+import { logout } from '../../../data/redux/slices/auth/authSlice';
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
@@ -39,12 +38,7 @@ export default function FormDialog() {
         setOpen(true);
     };
 
-    useEffect(() => {
-        dispatch(login({ email, password }))
-    }, []);
-
     const handleLogin = async () => {
-        // await LoginService(email, password);
         dispatch(login({ email, password }));
         setOpen(false);
     };
@@ -64,19 +58,19 @@ export default function FormDialog() {
     const handleClickMenuItem = (setting) => {
         switch (setting) {
             case 'Profile':
-                dispatch(profile(token))
+                dispatch(profile(token));
                 break;
             case 'Account':
                 // Account
                 break;
             case 'Logout':
-                // Logout
+                dispatch(logout(token));
                 break;
             default:
-                // Dashboard
+                dispatch(dashboard(token));
                 break;
         }
-        handleCloseUserMenu()
+        handleCloseUserMenu();
     };
 
     // const theme = createTheme({
@@ -167,9 +161,13 @@ export default function FormDialog() {
                     >
                         {settings.map((setting) => (
                             <MenuItem key={setting}
+                                component={NavLink}
+                                to={setting.toLowerCase()}
                                 onClick={() => handleClickMenuItem(setting)}
                             >
-                                <Typography textAlign="center">{setting}</Typography>
+                                <Typography textAlign="center">
+                                    {setting}
+                                </Typography>
                             </MenuItem>
                         ))}
                     </Menu>

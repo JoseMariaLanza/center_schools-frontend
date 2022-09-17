@@ -1,12 +1,23 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = JSON.parse(sessionStorage.getItem('session')) ?
-    JSON.parse(sessionStorage.getItem('session')) :
-    {
-        token: '',
-        isLoggedIn: false,
-        isLoading: false,
-    };
+
+// const userToken = JSON.parse(sessionStorage.getItem('session'));
+
+// const initialState = userToken ?
+//     userToken :
+//     {
+//         token: '',
+//         isLoggedIn: false,
+//         isLoading: false,
+//         userData: null
+//     };
+
+const initialState = {
+    token: '',
+    isLoggedIn: false,
+    isLoading: false,
+    userData: null
+};
 
 export const authSlice = createSlice({
     name: 'auth',
@@ -15,33 +26,30 @@ export const authSlice = createSlice({
         startLoading: (state) => {
             state.isLoading = true;
         },
-        setUserToken: (state, action) => {
+        getUserToken: (state, action) => {
             state.isLoading = false;
             state.token = action.payload.token;
             state.isLoggedIn = true;
-            sessionStorage.setItem('session', JSON.stringify(state));
-        },
-        setUserProfile: (state, action) => {
-            // state.userData = localStorage.setItem('userData', action.payload)
-            // {
-            //     auth: state.token,
-            //     user: 1,
-            //     birth_date: null,
-            //     blood_type: null,
-            //     first_name: null,
-            //     id: 1,
-            //     last_name: null,
-            //     observation: null,
-            //     status: "Guest",
-            // })
+            // sessionStorage.setItem('session', JSON.stringify(state));
         },
         getUserProfile: (state, action) => {
+            state.isLoading = false;
             state.userData = action.payload;
         },
         logout: (state, action) => {
-            console.log(action);
+            state.isLoading = false;
+            state.isLoggedIn = false;
+            state.token = '';
+            state.userData = null;
+            // state = initialState;
+            // console.log(action);
         }
     }
 })
 
-export const { startLoading, setUserToken, getUserProfile, logout } = authSlice.actions
+export const {
+    startLoading,
+    getUserToken,
+    getUserProfile,
+    logout
+} = authSlice.actions

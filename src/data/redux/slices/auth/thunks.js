@@ -1,5 +1,5 @@
-import { authApiService } from '../../../../domain/services/auth/authApiService';
-import { startLoading, setUserToken, getUserProfile } from './authSlice'
+import { AuthCenterSchoolsApiConfig } from '../../../authApiConfigs';
+import { startLoading, getUserToken, getUserProfile } from './authSlice'
 
 const login = (payload) => {
     return async (dispatch, getState) => {
@@ -8,15 +8,22 @@ const login = (payload) => {
         // const data = await LoginService(payload)
 
         try {
-            const { data } = await authApiService.post('user/token/', payload);
+            const { data } = await AuthCenterSchoolsApiConfig.post('user/token/', payload);
 
-            // if (status !== Response.HTTP_OK) {
-            //     alert('Ocurrió un error');
-            // }
+            dispatch(getUserToken(data));
 
-            dispatch(setUserToken(data));
+            const userData = await AuthCenterSchoolsApiConfig.get('user/profile/', {
+                headers: {
+                    'Authorization': `Token ${data.token}`
+                }
+            });
+
+            if (userData) {
+                dispatch(getUserProfile(userData.data));
+            }
+
         } catch (error) {
-
+            console.log(error);
         }
 
     }
@@ -27,20 +34,45 @@ const profile = (payload) => {
         dispatch(startLoading());
 
         try {
-            const { data } = await authApiService.get('user/profile/', {
+            const { data } = await AuthCenterSchoolsApiConfig.get('user/profile/', {
                 headers: {
                     'Authorization': `Token ${payload}`
                 }
             });
 
-            console.log('USER PROFILE: ', data)
+            if (data) {
+                dispatch(getUserProfile(data));
+            }
 
-            dispatch(getUserProfile(data));
         } catch (error) {
-
+            console.log(error);
         }
-
     }
 }
+
+const logout = (payload) => {
+    return async (dispatch, getState) => {
+        dispatch(startLoading());
+
+        try {
+            const { data } = await AuthCenterSchoolsApiConfig.get('user/logout/', {
+                headers: {
+                    'Authorization': `Token ${payload}`
+                }
+            });
+
+            console.log('LOGOUT: ', data);
+
+            if (data) {
+                dispatch(logout(data));
+            }
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
+}
+
+
 
 export { login, profile };

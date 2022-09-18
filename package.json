@@ -25,6 +25,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "start:test": "NODE_ENV=test node index.jsx",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "cypress:open": "cypress open"
@@ -49,6 +50,7 @@
   },
   "devDependencies": {
     "babel-plugin-config-module-resolver": "^1.0.2",
-    "cypress": "^10.8.0"
+    "cypress": "^10.8.0",
+    "eslint-plugin-cypress": "^2.12.1"
   }
 }

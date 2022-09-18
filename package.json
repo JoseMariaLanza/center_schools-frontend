@@ -47,6 +47,7 @@
     ]
   },
   "devDependencies": {
-    "babel-plugin-config-module-resolver": "^1.0.2"
+    "babel-plugin-config-module-resolver": "^1.0.2",
+    "cypress": "^10.8.0"
   }
 }

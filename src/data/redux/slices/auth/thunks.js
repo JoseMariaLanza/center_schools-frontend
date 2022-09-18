@@ -5,8 +5,6 @@ const login = (payload) => {
     return async (dispatch, getState) => {
         dispatch(startLoading());
 
-        // const data = await LoginService(payload)
-
         try {
             const { data } = await AuthCenterSchoolsApiConfig.post('user/token/', payload);
 
@@ -75,4 +73,4 @@ const logout = (payload) => {
 
 
 
-export { login, profile };
+export { login, profile, logout };

@@ -1,5 +1,6 @@
 import { AuthCenterSchoolsApiConfig } from '../../../authApiConfigs';
-import { startLoading, getUserToken, getUserProfile } from './authSlice'
+import { startLoading, getUserToken, getUserProfile } from './authSlice';
+import { clearPosts } from '../publisher/postSlice';
 
 const login = (payload) => {
     return async (dispatch, getState) => {
@@ -63,6 +64,7 @@ const logout = (payload) => {
 
             if (data) {
                 dispatch(logout(data));
+                dispatch(clearPosts())
             }
 
         } catch (error) {

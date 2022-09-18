@@ -27,11 +27,16 @@ export const postSlice = createSlice({
         setUserPosts: (state, action) => {
             state.isLoading = false;
             state.userPosts = action.payload.data;
+        },
+        clearPosts: (state, action) => {
+            state.isLoading = false;
+            state.userPosts = null;
         }
     }
 })
 
 export const {
     startLoading,
-    setUserPosts
+    setUserPosts,
+    clearPosts,
 } = postSlice.actions;

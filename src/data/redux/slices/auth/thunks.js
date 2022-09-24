@@ -1,11 +1,10 @@
 import { AuthCenterSchoolsApiConfig } from '../../../authApiConfigs';
-import { startLoading, getUserToken, getUserProfile } from './authSlice'
+import { startLoading, getUserToken, getUserProfile } from './authSlice';
+import { clearPosts } from '../publisher/postSlice';
 
 const login = (payload) => {
     return async (dispatch, getState) => {
         dispatch(startLoading());
-
-        // const data = await LoginService(payload)
 
         try {
             const { data } = await AuthCenterSchoolsApiConfig.post('user/token/', payload);
@@ -65,6 +64,7 @@ const logout = (payload) => {
 
             if (data) {
                 dispatch(logout(data));
+                dispatch(clearPosts())
             }
 
         } catch (error) {
@@ -75,4 +75,4 @@ const logout = (payload) => {
 
 
 
-export { login, profile };
+export { login, profile, logout };

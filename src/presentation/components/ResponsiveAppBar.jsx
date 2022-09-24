@@ -20,7 +20,7 @@ import { Icon } from '@mui/material';
 const pages = [
     {
         text: 'Home',
-        route: '/',
+        route: '/home',
         key: 'home'
     },
     {
@@ -56,7 +56,7 @@ const ResponsiveAppBar = () => {
         palette: {
             primary: {
                 light: '#fff',
-                main: 'white',
+                main: '#fff',
                 dark: '#002884',
                 contrastText: '#4D4D4E',
             }

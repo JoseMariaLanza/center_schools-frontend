@@ -2,7 +2,6 @@ import React from 'react';
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 
 import Layout from '../../presentation/pages/layouts/Layout';
-// import App from '../../App';
 import DashBoard from '../../presentation/pages/DashBoard';
 import { useSelector } from 'react-redux';
 import Home from '../../presentation/pages/Home';
@@ -17,6 +16,10 @@ const AppRouter = () => {
                 <Layout />
                 <Routes>
                     <Route index element={<Home />} />
+                    <Route path='/home' element={<Home />} />
+                    <Route path='/schools' element={<Home />} />
+                    <Route path='/history' element={<Home />} />
+                    <Route path='/news' element={<Home />} />
                 </Routes>
                 <Routes>
                     <Route path='dashboard' element={

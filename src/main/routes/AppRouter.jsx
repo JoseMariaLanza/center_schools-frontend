@@ -1,51 +1,71 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
+import PropTypes from 'prop-types';
+import {
+  BrowserRouter, Routes, Route, Navigate,
+} from 'react-router-dom';
 
+import { useSelector } from 'react-redux';
 import Layout from '../../presentation/pages/layouts/Layout';
 import DashBoard from '../../presentation/pages/DashBoard';
-import { useSelector } from 'react-redux';
 import Home from '../../presentation/pages/Home';
 
+function AppRouter() {
+  const { isLoggedIn } = useSelector((state) => state.auth);
 
-const AppRouter = () => {
-    const { isLoggedIn } = useSelector(state => state.auth);
-
-    return (
-        <>
-            <BrowserRouter>
-                <Layout />
-                <Routes>
-                    <Route index element={<Home />} />
-                    <Route path='/home' element={<Home />} />
-                    <Route path='/schools' element={<Home />} />
-                    <Route path='/history' element={<Home />} />
-                    <Route path='/news' element={<Home />} />
-                </Routes>
-                <Routes>
-                    <Route path='dashboard' element={
-                        <ProtectedRoute isLoggedIn={isLoggedIn} isAllowed={true} >
-                            <DashBoard />
-                        </ProtectedRoute>
-                    }>
-                    </Route>
-                    <Route path='logout' element={
-                        <ProtectedRoute isLoggedIn={isLoggedIn} />
-                    }>
-                    </Route>
-                    {/* <Route path='*' element={<NotFoundPage />} /> */}
-                </Routes>
-            </BrowserRouter>
-        </>
-    )
+  return (
+    <BrowserRouter>
+      <Layout />
+      <Routes>
+        <Route index element={<Home />} />
+        <Route path="/home" element={<Home />} />
+        <Route path="/schools" element={<Home />} />
+        <Route path="/history" element={<Home />} />
+        <Route path="/news" element={<Home />} />
+      </Routes>
+      <Routes>
+        <Route
+          path="dashboard"
+          element={(
+            <ProtectedRoute isLoggedIn={isLoggedIn} isAllowed>
+              <DashBoard />
+            </ProtectedRoute>
+          )}
+        />
+        <Route
+          path="logout"
+          element={
+            <ProtectedRoute isLoggedIn={isLoggedIn} />
+          }
+        />
+        {/* <Route path='*' element={<NotFoundPage />} /> */}
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
-const ProtectedRoute = ({ isLoggedIn, isAllowed, redirectPath = '/', children }) => {
-    if (!isLoggedIn || !isAllowed) {
-        return <Navigate to={redirectPath} replace />;
-    }
+function ProtectedRoute({
+  isLoggedIn, isAllowed, redirectPath, children,
+}) {
+  if (!isLoggedIn || !isAllowed) {
+    return <Navigate to={redirectPath} replace />;
+  }
 
-    return children;
+  return children;
+}
+
+ProtectedRoute.defaultProps = {
+  isLoggedIn: false,
+  isAllowed: false,
+  redirectPath: '/',
+  children: null,
 };
 
+ProtectedRoute.propTypes = {
+  isLoggedIn: PropTypes.bool,
+  isAllowed: PropTypes.bool,
+  redirectPath: PropTypes.string,
+  children: PropTypes.element,
 
-export default AppRouter
+};
+
+export default AppRouter;

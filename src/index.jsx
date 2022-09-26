@@ -1,13 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import './index.css';
-import reportWebVitals from './reportWebVitals';
-import AppRouter from './main/routes/AppRouter';
-import { persistor, store } from './data/redux/store';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
+import { persistor, store } from './data/redux/store';
 
-import './presentation/assets/styles/styles.css'
+import reportWebVitals from './reportWebVitals';
+
+import './index.css';
+import AppRouter from './main/routes/AppRouter';
+import './presentation/assets/styles/styles.css';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -17,7 +18,7 @@ root.render(
         <AppRouter />
       </PersistGate>
     </Provider>
-  </React.StrictMode>
+  </React.StrictMode>,
 );
 
 reportWebVitals();

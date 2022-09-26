@@ -1,15 +1,24 @@
-import ResponsiveAppBar from '../../components/ResponsiveAppBar'
-import React from 'react'
+import React from 'react';
+import PropTypes from 'prop-types';
+import ResponsiveAppBar from '../../components/ResponsiveAppBar';
 
-const Layout = ({ children }) => {
-    return (
-        <>
-            <ResponsiveAppBar />
-            <main>
-                {children}
-            </main>
-        </>
-    )
+function Layout({ children }) {
+  return (
+    <>
+      <ResponsiveAppBar />
+      <main>
+        {children}
+      </main>
+    </>
+  );
 }
 
-export default Layout
+Layout.defaultProps = {
+  children: null,
+};
+
+Layout.propTypes = {
+  children: PropTypes.element,
+};
+
+export default Layout;

@@ -18,162 +18,165 @@ import Avatar from '@mui/material/Avatar';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { login, profile } from '../../../data/redux/slices/auth/thunks';
-import { dashboard } from '../../../data/redux/slices/dashboard/thunks';
 import { NavLink } from 'react-router-dom';
+import { login, profile } from '../../../data/redux/slices/auth/thunks';
+import dashboard from '../../../data/redux/slices/dashboard/thunks';
 import { logout } from '../../../data/redux/slices/auth/authSlice';
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 export default function FormDialog() {
-    const [open, setOpen] = useState(false);
-    const [anchorElUser, setAnchorElUser] = useState(null);
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+  const [open, setOpen] = useState(false);
+  const [anchorElUser, setAnchorElUser] = useState(null);
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
 
-    const dispatch = useDispatch();
-    const { isLoggedIn, token } = useSelector(state => state.auth);
+  const dispatch = useDispatch();
+  const { isLoggedIn, token } = useSelector((state) => state.auth);
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
 
-    const handleLogin = async () => {
-        dispatch(login({ email, password }));
-        setOpen(false);
-    };
+  const handleLogin = async () => {
+    dispatch(login({ email, password }));
+    setOpen(false);
+  };
 
-    const handleClose = () => {
-        setOpen(false);
-    };
+  const handleClose = () => {
+    setOpen(false);
+  };
 
-    const handleOpenUserMenu = (event) => {
-        setAnchorElUser(event.currentTarget);
-    };
+  const handleOpenUserMenu = (event) => {
+    setAnchorElUser(event.currentTarget);
+  };
 
-    const handleCloseUserMenu = () => {
-        setAnchorElUser(null);
-    };
+  const handleCloseUserMenu = () => {
+    setAnchorElUser(null);
+  };
 
-    const handleClickMenuItem = (setting) => {
-        switch (setting) {
-            case 'Profile':
-                dispatch(profile(token));
-                break;
-            case 'Account':
-                // Account
-                break;
-            case 'Logout':
-                dispatch(logout(token));
-                break;
-            default:
-                dispatch(dashboard(token));
-                break;
-        }
-        handleCloseUserMenu();
-    };
+  const handleClickMenuItem = (setting) => {
+    switch (setting) {
+      case 'Profile':
+        dispatch(profile(token));
+        break;
+      case 'Account':
+        // Account
+        break;
+      case 'Logout':
+        dispatch(logout(token));
+        break;
+      default:
+        dispatch(dashboard(token));
+        break;
+    }
+    handleCloseUserMenu();
+  };
 
-    // const theme = createTheme({
-    //     palette: {
-    //         primary: {
-    //             light: '#fff',
-    //             main: 'white',
-    //             dark: '#002884',
-    //             contrastText: '#4D4D4E',
-    //         }
-    //     },
-    // });
+  // const theme = createTheme({
+  //     palette: {
+  //         primary: {
+  //             light: '#fff',
+  //             main: 'white',
+  //             dark: '#002884',
+  //             contrastText: '#4D4D4E',
+  //         }
+  //     },
+  // });
 
-    return (
-        <div>
-            {!isLoggedIn ?
-                <>
-                    <Button
-                        id='login'
-                        sx={{
-                            borderRadius: '100%',
-                            color: '#4D4D4E'
-                        }}
-                        onClick={handleClickOpen}
-                    >
-                        <AccountCircleOutlinedIcon
-                            sx={{
-                                fontSize: '3rem',
-                                borderRadius: '100%',
-                                color: 'inherit'
-                            }}
-                        />
-                    </Button>
-                    <Dialog open={open} onClose={handleClose}>
-                        <DialogTitle>Login</DialogTitle>
-                        <DialogContent>
-                            <DialogContentText>
-                                Login to view your school information.
-                            </DialogContentText>
-                            <TextField
-                                autoFocus
-                                margin="dense"
-                                id="email"
-                                label="Email"
-                                type="email"
-                                fullWidth
-                                variant="standard"
-                                value={email}
-                                onChange={(e) => setEmail(e.target.value)}
-                            />
-                            <TextField
-                                margin="dense"
-                                id="password"
-                                label="Password"
-                                type="password"
-                                fullWidth
-                                variant="standard"
-                                value={password}
-                                onChange={(e) => setPassword(e.target.value)}
-                            />
-                        </DialogContent>
-                        <DialogActions>
-                            <Button id='login-button' onClick={handleLogin}>Login</Button>
-                            <Button onClick={handleClose}>Cancel</Button>
-                        </DialogActions>
-                    </Dialog>
-                </> :
-                <Box sx={{ flexGrow: 0 }}>
-                    <Tooltip title="Open settings">
-                        <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                            <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-                        </IconButton>
-                    </Tooltip>
-                    <Menu
-                        sx={{ mt: '45px' }}
-                        id="menu-appbar"
-                        anchorEl={anchorElUser}
-                        anchorOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
-                        }}
-                        keepMounted
-                        transformOrigin={{
-                            vertical: 'top',
-                            horizontal: 'right',
-                        }}
-                        open={Boolean(anchorElUser)}
-                        onClose={handleCloseUserMenu}
-                    >
-                        {settings.map((setting) => (
-                            <MenuItem key={setting}
-                                component={NavLink}
-                                to={setting.toLowerCase()}
-                                onClick={() => handleClickMenuItem(setting)}
-                            >
-                                <Typography textAlign="center">
-                                    {setting}
-                                </Typography>
-                            </MenuItem>
-                        ))}
-                    </Menu>
-                </Box>
-            }
-        </div>
-    );
+  return (
+    <div>
+      {!isLoggedIn
+        ? (
+          <>
+            <Button
+              sx={{
+                borderRadius: '100%',
+                color: '#4D4D4E',
+              }}
+              onClick={handleClickOpen}
+            >
+              <AccountCircleOutlinedIcon
+                sx={{
+                  fontSize: '3rem',
+                  borderRadius: '100%',
+                  color: 'inherit',
+                }}
+              />
+            </Button>
+            <Dialog open={open} onClose={handleClose}>
+              <DialogTitle>Login</DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  Login to view your school information.
+                </DialogContentText>
+                <TextField
+                  autoFocus
+                  margin="dense"
+                  id="email"
+                  label="Email"
+                  type="email"
+                  fullWidth
+                  variant="standard"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+                <TextField
+                  margin="dense"
+                  id="password"
+                  label="Password"
+                  type="password"
+                  fullWidth
+                  variant="standard"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </DialogContent>
+              <DialogActions>
+                <Button onClick={handleLogin}>Login</Button>
+                <Button onClick={handleClose}>Cancel</Button>
+              </DialogActions>
+            </Dialog>
+          </>
+        )
+        : (
+          <Box sx={{ flexGrow: 0 }}>
+            <Tooltip title="Open settings">
+              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+              </IconButton>
+            </Tooltip>
+            <Menu
+              sx={{ mt: '45px' }}
+              id="menu-appbar"
+              anchorEl={anchorElUser}
+              anchorOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              keepMounted
+              transformOrigin={{
+                vertical: 'top',
+                horizontal: 'right',
+              }}
+              open={Boolean(anchorElUser)}
+              onClose={handleCloseUserMenu}
+            >
+              {settings.map((setting) => (
+                <MenuItem
+                  key={setting}
+                  component={NavLink}
+                  to={setting.toLowerCase()}
+                  onClick={() => handleClickMenuItem(setting)}
+                >
+                  <Typography textAlign="center">
+                    {setting}
+                  </Typography>
+                </MenuItem>
+              ))}
+            </Menu>
+          </Box>
+        )}
+    </div>
+  );
 }

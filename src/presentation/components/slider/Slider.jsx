@@ -1,22 +1,21 @@
-import React from 'react'
+import React from 'react';
 import Box from '@mui/material/Box';
-import Carousel from '../carousel/Carousel'
+import Carousel from '../carousel/Carousel';
 
-const Slider = () => {
-    return (
-        <>
-            <Box sx={{
-                marginTop: '1rem',
-                flexGrow: 1,
-                width: '100%',
-                height: '100%'
-            }}>
+function Slider() {
+  return (
+    <Box sx={{
+      marginTop: '1rem',
+      flexGrow: 1,
+      width: '100%',
+      height: '100%',
+    }}
+    >
 
-                <Carousel />
+      <Carousel />
 
-            </Box>
-        </>
-    )
+    </Box>
+  );
 }
 
-export default Slider
+export default Slider;

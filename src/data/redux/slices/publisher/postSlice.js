@@ -1,5 +1,5 @@
-import { createSlice } from "@reduxjs/toolkit";
-
+/* eslint-disable no-param-reassign */
+import { createSlice } from '@reduxjs/toolkit';
 
 // const userToken = JSON.parse(sessionStorage.getItem('session'));
 
@@ -9,34 +9,34 @@ import { createSlice } from "@reduxjs/toolkit";
 // };
 
 const postsInitialState = {
-    isLoading: false,
-    data: null,
+  isLoading: false,
+  data: null,
 };
 
 export const postSlice = createSlice({
-    name: 'post',
-    initialState: postsInitialState,
-    reducers: {
-        startLoading: (state) => {
-            state.isLoading = true;
-        },
-        getAllPosts: (state, action) => {
-            state.isLoading = false;
-            state.data = action.payload.data
-        },
-        setUserPosts: (state, action) => {
-            state.isLoading = false;
-            state.userPosts = action.payload.data;
-        },
-        clearPosts: (state, action) => {
-            state.isLoading = false;
-            state.userPosts = null;
-        }
-    }
-})
+  name: 'post',
+  initialState: postsInitialState,
+  reducers: {
+    startLoading: (state) => {
+      state.isLoading = true;
+    },
+    getAllPosts: (state, action) => {
+      state.isLoading = false;
+      state.data = action.payload.data;
+    },
+    setUserPosts: (state, action) => {
+      state.isLoading = false;
+      state.userPosts = action.payload.data;
+    },
+    clearPosts: (state) => {
+      state.isLoading = false;
+      state.userPosts = null;
+    },
+  },
+});
 
 export const {
-    startLoading,
-    setUserPosts,
-    clearPosts,
+  startLoading,
+  setUserPosts,
+  clearPosts,
 } = postSlice.actions;

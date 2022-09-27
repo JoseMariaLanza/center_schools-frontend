@@ -90,6 +90,7 @@ export default function FormDialog() {
         ? (
           <>
             <Button
+              id="login"
               sx={{
                 borderRadius: '100%',
                 color: '#4D4D4E',
@@ -133,7 +134,7 @@ export default function FormDialog() {
                 />
               </DialogContent>
               <DialogActions>
-                <Button onClick={handleLogin}>Login</Button>
+                <Button id="login-button" onClick={handleLogin}>Login</Button>
                 <Button onClick={handleClose}>Cancel</Button>
               </DialogActions>
             </Dialog>

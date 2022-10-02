@@ -29,6 +29,7 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 export default function FormDialog() {
   const { onInputChange, formState } = useForm({
+    lulu: '',
     email: '',
     password: '',
   });
@@ -121,25 +122,29 @@ export default function FormDialog() {
                   <DialogContentText>
                     Login to view your school information.
                   </DialogContentText>
-                  {/* <InputForm>
+
+                  <InputForm
+                    messageError="You're name has to be lulu or jose."
+                  >
                     <TextField
-                      autoFocus
+                      // autoFocus
                       margin="dense"
-                      id="email"
-                      name="email"
-                      label="Email"
-                      type="email"
-                      placeholder="example@email.com"
+                      id="lulu"
+                      name="lulu"
+                      label="Your name"
+                      placeholder="example: lulu"
                       fullWidth
                       variant="standard"
-                      value={formState.email}
-                      // onChange={(e) => setEmail(e.target.value)}
+                      value={formState.lulu}
                       onChange={onInputChange}
                     />
-                  </InputForm> */}
-                  <InputForm>
+                  </InputForm>
+
+                  <InputForm
+                    messageError="Please type a valid email."
+                  >
                     <TextField
-                      autoFocus
+                      // autoFocus
                       margin="dense"
                       id="email"
                       name="email"
@@ -166,6 +171,7 @@ export default function FormDialog() {
                       variant="standard"
                       value={formState.password}
                       // onChange={(e) => setPassword(e.target.value)}
+                      required
                       onChange={onInputChange}
                     />
                   </InputForm>

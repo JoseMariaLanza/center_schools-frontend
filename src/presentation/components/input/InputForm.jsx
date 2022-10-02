@@ -7,19 +7,12 @@ import fieldsValidator from '../../../validation/validators/fieldsValidator';
 
 function InputForm({ children, messageError }) {
   const {
-    // label,
     value,
     required,
-    // messageError,
   } = children.props;
-  const { error, setError } = useForm();
+  const childrenProps = children.props;
 
-  const Child = (props) => React.Children.map(children, (child) => {
-    if (React.isValidElement(child)) {
-      return React.cloneElement(child, { ...props });
-    }
-    return child;
-  });
+  const { error, setError } = useForm();
 
   useEffect(() => {
     if (value !== '') setError(false);
@@ -32,40 +25,40 @@ function InputForm({ children, messageError }) {
 
   return (
     <FormGroup>
-      {/* <FormLabel>{label}</FormLabel> */}
-      <FormControl>
-        <Child onBlur={required && handleError} />
+      <FormControl
+        autoFocus
+        required={childrenProps.required || required}
+        onBlur={handleError}
+      >
+        {children}
       </FormControl>
-      {error && <span className="error">{messageError}</span>}
+      {error && <span className="text-danger">{childrenProps.messageError || messageError}</span>}
     </FormGroup>
   );
 }
 
 InputForm.defaultProps = {
-  // label: '',
   required: false,
   messageError: 'This field is required',
+  childrenProps: {
+    label: '',
+    type: 'text',
+  },
 };
 
 InputForm.propTypes = {
   children: PropTypes.element.isRequired,
-  // label: PropTypes.string,
-  // type: PropTypes.string,
-  // name: PropTypes.string.isRequired,
-  // value: PropTypes.string.isRequired,
-  // onChange: PropTypes.func.isRequired,
+  childrenProps: PropTypes.shape({
+    label: PropTypes.string,
+    type: PropTypes.string,
+    name: PropTypes.string,
+    value: PropTypes.string,
+    onChange: PropTypes.func,
+    required: PropTypes.bool,
+    messageError: PropTypes.string,
+  }),
   required: PropTypes.bool,
   messageError: PropTypes.string,
 };
-// InputForm.propTypes = {
-//   children: PropTypes.element.isRequired,
-//   label: PropTypes.string,
-//   type: PropTypes.string,
-//   name: PropTypes.string.isRequired,
-//   value: PropTypes.string.isRequired,
-//   onChange: PropTypes.func.isRequired,
-//   required: PropTypes.bool,
-//   messageError: PropTypes.string,
-// };
 
 export default InputForm;

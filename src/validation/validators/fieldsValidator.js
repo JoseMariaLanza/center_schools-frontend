@@ -7,6 +7,9 @@ const fieldsValidator = ({ name, value }) => {
     case 'email':
       isValid = new RegExp(validateField.email, 'g').test(value);
       break;
+    case 'lulu':
+      isValid = ((new RegExp(validateField.lulu, 'g').test(value) && !new RegExp(validateField.jose, 'g').test(value)) || (!new RegExp(validateField.lulu, 'g').test(value) && new RegExp(validateField.jose, 'g').test(value)));
+      break;
 
     default:
       break;

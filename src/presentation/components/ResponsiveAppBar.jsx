@@ -14,7 +14,7 @@ import { createTheme } from '@mui/material/styles';
 
 import { NavLink } from 'react-router-dom';
 import { Icon } from '@mui/material';
-import Login from './account/Login';
+import Login from './auth/Login';
 import logo from '../assets/images/logos/logoITF.png';
 
 const pages = [

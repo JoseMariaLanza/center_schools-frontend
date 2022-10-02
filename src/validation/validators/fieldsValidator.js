@@ -1,9 +1,9 @@
 import PropTypes from 'prop-types';
 import validateField from './regExpFields.json';
 
-const fieldsValidator = ({ name, value }) => {
+const fieldsValidator = ({ validate, value }) => {
   let isValid = false;
-  switch (name) {
+  switch (validate) {
     case 'email':
       isValid = new RegExp(validateField.email, 'g').test(value);
       break;
@@ -12,6 +12,7 @@ const fieldsValidator = ({ name, value }) => {
       break;
 
     default:
+      if (value.length > 0) isValid = true;
       break;
   }
   return isValid;

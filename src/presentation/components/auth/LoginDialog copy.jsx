@@ -27,7 +27,7 @@ import InputForm from '../input/InputForm';
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-export default function FormDialog() {
+export default function LoginDialog() {
   const { onInputChange, formState } = useForm({
     email: '',
     password: '',

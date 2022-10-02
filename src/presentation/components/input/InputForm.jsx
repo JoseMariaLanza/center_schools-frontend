@@ -6,13 +6,12 @@ import useForm from '../../hooks/useForm';
 import fieldsValidator from '../../../validation/validators/fieldsValidator';
 
 function InputForm({ children, messageError }) {
+  const { error, setError } = useForm();
   const {
     value,
     required,
   } = children.props;
-  const childrenProps = children.props;
-
-  const { error, setError } = useForm();
+  // const childrenProps = children.props;
 
   useEffect(() => {
     if (value !== '') setError(false);
@@ -27,19 +26,18 @@ function InputForm({ children, messageError }) {
     <FormGroup>
       <FormControl
         autoFocus
-        required={childrenProps.required || required}
+        required={required}
         onBlur={handleError}
       >
         {children}
       </FormControl>
-      {error && <span className="text-danger">{childrenProps.messageError || messageError}</span>}
+      {error && <span className="text-danger">{messageError}</span>}
     </FormGroup>
   );
 }
 
 InputForm.defaultProps = {
-  required: false,
-  messageError: 'This field is required',
+  messageError: '',
   childrenProps: {
     label: '',
     type: 'text',
@@ -57,7 +55,6 @@ InputForm.propTypes = {
     required: PropTypes.bool,
     messageError: PropTypes.string,
   }),
-  required: PropTypes.bool,
   messageError: PropTypes.string,
 };
 

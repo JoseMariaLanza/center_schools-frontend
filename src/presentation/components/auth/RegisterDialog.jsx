@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -6,17 +6,18 @@ import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
-import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
 import { useDispatch } from 'react-redux';
 import useForm from '../../hooks/useForm';
-import { login } from '../../../data/redux/slices/auth/thunks';
+import { register } from '../../../data/redux/slices/auth/thunks';
 import InputForm from '../input/InputForm';
 
 export default function Auth() {
   const { onInputChange, formState } = useForm({
     email: '',
     password: '',
+    username: '',
+    passwordConfirmation: '',
   });
 
   const [open, setOpen] = useState(false);
@@ -29,8 +30,15 @@ export default function Auth() {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    dispatch(login(formState));
-    setOpen(false);
+    const {
+      passwordConfirmation,
+      password,
+    } = formState;
+
+    if (passwordConfirmation === password) {
+      dispatch(register(formState));
+      setOpen(false);
+    }
   };
 
   const handleClose = () => {
@@ -40,28 +48,36 @@ export default function Auth() {
   return (
     <>
       <Button
-        id="login"
-        sx={{
-          borderRadius: '100%',
-          color: '#4D4D4E',
-        }}
+        id="register"
+        sx={{ color: '#4D4D4E' }}
         onClick={handleClickOpen}
       >
-        <AccountCircleOutlinedIcon
-          sx={{
-            fontSize: '3rem',
-            borderRadius: '100%',
-            color: 'inherit',
-          }}
-        />
+        Register
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <form onSubmit={onSubmit}>
-          <DialogTitle>Login</DialogTitle>
+          <DialogTitle>Register</DialogTitle>
           <DialogContent>
             <DialogContentText>
-              Login to view your school information.
+              Create an account.
             </DialogContentText>
+
+            <InputForm
+              messageError="Please type a user name."
+            >
+              <TextField
+                margin="dense"
+                id="username"
+                name="username"
+                label="User name"
+                placeholder="JoseMariaLanza"
+                fullWidth
+                variant="standard"
+                required
+                value={formState.username}
+                onChange={onInputChange}
+              />
+            </InputForm>
 
             <InputForm
               messageError="Please type a valid email."
@@ -101,9 +117,29 @@ export default function Auth() {
               />
             </InputForm>
 
+            <InputForm
+              messageError="Please repeat your password."
+            >
+              <TextField
+                margin="dense"
+                id="passwordConfirmation"
+                name="passwordConfirmation"
+                validate="length"
+                label="Password confirmation"
+                type="password"
+                placeholder="Repeat your password"
+                fullWidth
+                variant="standard"
+                value={formState.passwordConfirmation}
+                onChange={onInputChange}
+                required
+                comparewith={formState.password}
+              />
+            </InputForm>
+
           </DialogContent>
           <DialogActions>
-            <Button id="login-button" type="submit">Login</Button>
+            <Button id="register-button" type="submit">Register</Button>
             <Button onClick={handleClose}>Close</Button>
           </DialogActions>
         </form>

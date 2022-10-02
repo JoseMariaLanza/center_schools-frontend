@@ -1,5 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
+import RegisterDialog from './RegisterDialog';
 import LoginDialog from './LoginDialog';
 import AuthMenu from './AuthMenu';
 
@@ -21,11 +22,11 @@ export default function Auth() {
     <div>
       {!isLoggedIn
         ? (
-          <LoginDialog />
-        )
-        : (
-          <AuthMenu />
-        )}
+          <>
+            <RegisterDialog />
+            <LoginDialog />
+          </>
+        ) : <AuthMenu />}
     </div>
   );
 }

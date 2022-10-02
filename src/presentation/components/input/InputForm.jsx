@@ -11,7 +11,6 @@ function InputForm({ children, messageError }) {
     value,
     required,
   } = children.props;
-  // const childrenProps = children.props;
 
   useEffect(() => {
     if (value !== '') setError(false);

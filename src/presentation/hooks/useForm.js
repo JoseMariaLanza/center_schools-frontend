@@ -11,7 +11,6 @@ const useForm = (initialForm = {}) => {
       [name]: value,
     });
   };
-  // console.log(formState);
 
   const onResetForm = () => {
     setFormState(initialForm);

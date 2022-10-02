@@ -29,15 +29,12 @@ const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
 export default function FormDialog() {
   const { onInputChange, formState } = useForm({
-    lulu: '',
     email: '',
     password: '',
   });
 
   const [open, setOpen] = useState(false);
   const [anchorElUser, setAnchorElUser] = useState(null);
-  // const [email, setEmail] = useState('');
-  // const [password, setPassword] = useState('');
 
   const dispatch = useDispatch();
   const { isLoggedIn, token } = useSelector((state) => state.auth);
@@ -49,7 +46,6 @@ export default function FormDialog() {
   const onSubmit = (event) => {
     event.preventDefault();
     dispatch(login(formState));
-    // dispatch(login({ email, password }));
     setOpen(false);
   };
 
@@ -124,27 +120,9 @@ export default function FormDialog() {
                   </DialogContentText>
 
                   <InputForm
-                    messageError="You're name has to be lulu or jose."
-                  >
-                    <TextField
-                      // autoFocus
-                      margin="dense"
-                      id="lulu"
-                      name="lulu"
-                      label="Your name"
-                      placeholder="example: lulu"
-                      fullWidth
-                      variant="standard"
-                      value={formState.lulu}
-                      onChange={onInputChange}
-                    />
-                  </InputForm>
-
-                  <InputForm
                     messageError="Please type a valid email."
                   >
                     <TextField
-                      // autoFocus
                       margin="dense"
                       id="email"
                       name="email"
@@ -170,7 +148,6 @@ export default function FormDialog() {
                       fullWidth
                       variant="standard"
                       value={formState.password}
-                      // onChange={(e) => setPassword(e.target.value)}
                       required
                       onChange={onInputChange}
                     />

@@ -1,20 +1,15 @@
 import PropTypes from 'prop-types';
 import validateField from './regExpFields.json';
 
-const fieldsValidator = ({ validate, value, comparewith }) => {
+const fieldsValidator = ({ type, value, compareWith }) => {
   let isValid = false;
-  switch (validate) {
+  switch (type) {
     case 'email':
       isValid = new RegExp(validateField.email, 'g').test(value);
       break;
-    case 'lulu':
-      isValid = ((new RegExp(validateField.lulu, 'g').test(value) && !new RegExp(validateField.jose, 'g').test(value)) || (!new RegExp(validateField.lulu, 'g').test(value) && new RegExp(validateField.jose, 'g').test(value)));
-      break;
     case 'passwordConfirmation':
-      isValid = value === comparewith;
-      console.log(isValid);
+      isValid = value === compareWith;
       break;
-
     default:
       if (value.length > 0) isValid = true;
       break;

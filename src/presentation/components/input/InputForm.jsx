@@ -10,15 +10,16 @@ function InputForm({ children, messageError }) {
   const {
     value,
     required,
+    validate,
   } = children.props;
 
   useEffect(() => {
     if (value !== '') setError(false);
   }, [value]);
 
-  const handleError = ({ target }) => {
+  const handleError = () => {
     if (value === '') setError(true);
-    if (!fieldsValidator(target)) setError(true);
+    if (!fieldsValidator(validate)) setError(true);
   };
 
   return (

@@ -1,4 +1,5 @@
-import React, { useRef, useState } from 'react';
+/* eslint-disable react/prop-types */
+import React, { useState } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -30,14 +31,12 @@ export default function Auth() {
 
   const onSubmit = (event) => {
     event.preventDefault();
-    const {
-      passwordConfirmation,
-      password,
-    } = formState;
 
-    if (passwordConfirmation === password) {
+    if (formState.passwordConfirmation === formState.password) {
       dispatch(register(formState));
       setOpen(false);
+    } else {
+      console.log('Password not equals.');
     }
   };
 
@@ -69,6 +68,7 @@ export default function Auth() {
                 margin="dense"
                 id="username"
                 name="username"
+                validate={{ type: 'username', value: formState.username }}
                 label="User name"
                 placeholder="JoseMariaLanza"
                 fullWidth
@@ -86,7 +86,7 @@ export default function Auth() {
                 margin="dense"
                 id="email"
                 name="email"
-                validate="email"
+                validate={{ type: 'email', value: formState.email }}
                 label="Email"
                 type="email"
                 placeholder="example@email.com"
@@ -105,7 +105,7 @@ export default function Auth() {
                 margin="dense"
                 id="password"
                 name="password"
-                validate="length"
+                validate={{ type: 'length', value: formState.password }}
                 label="Password"
                 type="password"
                 placeholder="Write your password"
@@ -118,13 +118,17 @@ export default function Auth() {
             </InputForm>
 
             <InputForm
-              messageError="Please repeat your password."
+              messageError="Please repeat your password"
             >
               <TextField
                 margin="dense"
                 id="passwordConfirmation"
                 name="passwordConfirmation"
-                validate="length"
+                validate={{
+                  type: 'passwordConfirmation',
+                  value: formState.passwordConfirmation,
+                  compareWith: formState.password,
+                }}
                 label="Password confirmation"
                 type="password"
                 placeholder="Repeat your password"
@@ -133,13 +137,12 @@ export default function Auth() {
                 value={formState.passwordConfirmation}
                 onChange={onInputChange}
                 required
-                comparewith={formState.password}
               />
             </InputForm>
 
           </DialogContent>
           <DialogActions>
-            <Button id="register-button" type="submit">Register</Button>
+            <Button id="login-button" type="submit">Register</Button>
             <Button onClick={handleClose}>Close</Button>
           </DialogActions>
         </form>

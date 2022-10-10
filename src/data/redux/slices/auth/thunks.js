@@ -6,9 +6,10 @@ const register = (payload) => async (dispatch) => {
   dispatch(startLoading());
 
   try {
-    const { data } = await AuthCenterSchoolsApiConfig.post('user/token/', payload);
+    const { data } = await AuthCenterSchoolsApiConfig.post('user/create/', payload);
+    const { data: token } = await AuthCenterSchoolsApiConfig.post('user/token/', payload);
 
-    dispatch(getUserToken(data));
+    dispatch(getUserToken({ token }));
 
     const userData = await AuthCenterSchoolsApiConfig.get('user/profile/', {
       headers: {

@@ -14,8 +14,8 @@ import { createTheme } from '@mui/material/styles';
 
 import { NavLink } from 'react-router-dom';
 import { Icon } from '@mui/material';
-import Login from './account/Login';
 import logo from '../assets/images/logos/logoITF.png';
+import Auth from './auth/Auth';
 
 const pages = [
   {
@@ -173,7 +173,7 @@ function ResponsiveAppBar() {
               </Button>
             ))}
           </Box>
-          <Login />
+          <Auth />
         </Toolbar>
       </Container>
     </AppBar>

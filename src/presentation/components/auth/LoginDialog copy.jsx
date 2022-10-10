@@ -19,17 +19,22 @@ import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined
 
 import { useDispatch, useSelector } from 'react-redux';
 import { NavLink } from 'react-router-dom';
+import useForm from '../../hooks/useForm';
 import { login, profile } from '../../../data/redux/slices/auth/thunks';
 import dashboard from '../../../data/redux/slices/dashboard/thunks';
 import { logout } from '../../../data/redux/slices/auth/authSlice';
+import InputForm from '../input/InputForm';
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 
-export default function FormDialog() {
+export default function LoginDialog() {
+  const { onInputChange, formState } = useForm({
+    email: '',
+    password: '',
+  });
+
   const [open, setOpen] = useState(false);
   const [anchorElUser, setAnchorElUser] = useState(null);
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
 
   const dispatch = useDispatch();
   const { isLoggedIn, token } = useSelector((state) => state.auth);
@@ -38,8 +43,9 @@ export default function FormDialog() {
     setOpen(true);
   };
 
-  const handleLogin = async () => {
-    dispatch(login({ email, password }));
+  const onSubmit = (event) => {
+    event.preventDefault();
+    dispatch(login(formState));
     setOpen(false);
   };
 
@@ -106,37 +112,53 @@ export default function FormDialog() {
               />
             </Button>
             <Dialog open={open} onClose={handleClose}>
-              <DialogTitle>Login</DialogTitle>
-              <DialogContent>
-                <DialogContentText>
-                  Login to view your school information.
-                </DialogContentText>
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="email"
-                  label="Email"
-                  type="email"
-                  fullWidth
-                  variant="standard"
-                  value={email}
-                  onChange={(e) => setEmail(e.target.value)}
-                />
-                <TextField
-                  margin="dense"
-                  id="password"
-                  label="Password"
-                  type="password"
-                  fullWidth
-                  variant="standard"
-                  value={password}
-                  onChange={(e) => setPassword(e.target.value)}
-                />
-              </DialogContent>
-              <DialogActions>
-                <Button id="login-button" onClick={handleLogin}>Login</Button>
-                <Button onClick={handleClose}>Cancel</Button>
-              </DialogActions>
+              <form onSubmit={onSubmit}>
+                <DialogTitle>Login</DialogTitle>
+                <DialogContent>
+                  <DialogContentText>
+                    Login to view your school information.
+                  </DialogContentText>
+
+                  <InputForm
+                    messageError="Please type a valid email."
+                  >
+                    <TextField
+                      margin="dense"
+                      id="email"
+                      name="email"
+                      label="Email"
+                      type="email"
+                      placeholder="example@email.com"
+                      fullWidth
+                      variant="standard"
+                      required
+                      value={formState.email}
+                      onChange={onInputChange}
+                    />
+                  </InputForm>
+
+                  <InputForm>
+                    <TextField
+                      margin="dense"
+                      id="password"
+                      name="password"
+                      label="Password"
+                      type="password"
+                      placeholder="Write your password"
+                      fullWidth
+                      variant="standard"
+                      value={formState.password}
+                      required
+                      onChange={onInputChange}
+                    />
+                  </InputForm>
+
+                </DialogContent>
+                <DialogActions>
+                  <Button id="login-button" type="submit">Login</Button>
+                  <Button onClick={handleClose}>Cancel</Button>
+                </DialogActions>
+              </form>
             </Dialog>
           </>
         )

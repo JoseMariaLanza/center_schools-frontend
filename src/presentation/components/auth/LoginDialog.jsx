@@ -9,11 +9,14 @@ import DialogTitle from '@mui/material/DialogTitle';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
 import { useDispatch } from 'react-redux';
+// import { useTranslation } from 'react-i18next';
 import useForm from '../../hooks/useForm';
 import { login } from '../../../data/redux/slices/auth/thunks';
 import InputForm from '../input/InputForm';
 
 export default function Auth() {
+  // const { t, i18n } = useTranslation();
+
   const { onInputChange, formState } = useForm({
     email: '',
     password: '',
@@ -57,7 +60,7 @@ export default function Auth() {
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <form onSubmit={onSubmit}>
-          <DialogTitle>Login</DialogTitle>
+          <DialogTitle>Sign In</DialogTitle>
           <DialogContent>
             <DialogContentText>
               Login to view your school information.

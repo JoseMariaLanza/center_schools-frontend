@@ -1,31 +1,26 @@
 {
-  "env": {
-    "browser": true,
-    "es2021": true,
-    "cypress/globals": true
-  },
-  "extends": [
-    "plugin:react/recommended",
-    "airbnb",
-    "plugin:cypress/recommended"
-  ],
-  "overrides": [],
-  "parserOptions": {
-    "ecmaVersion": "latest",
-    "sourceType": "module"
-  },
-  "plugins": [
-    "react",
-    "@babel",
-    "import",
-    "jsx-a11y",
-    "cypress"
-  ],
-  "ignorePatterns": [
-    "src/**/*.css",
-    "src/**/*.json",
-    "src/**/*.svg",
-    "src/**/*.png"
-  ],
-  "rules": {}
+    "env": {
+        "browser": true,
+        "es2021": true,
+        "cypress/globals": true
+    },
+    "extends": [
+        "plugin:react/recommended",
+        "airbnb",
+        "plugin:cypress/recommended",
+        "prettier"
+    ],
+    "overrides": [],
+    "parserOptions": {
+        "ecmaVersion": "latest",
+        "sourceType": "module"
+    },
+    "plugins": ["react", "@babel", "import", "jsx-a11y", "cypress"],
+    "ignorePatterns": [
+        "src/**/*.css",
+        "src/**/*.json",
+        "src/**/*.svg",
+        "src/**/*.png"
+    ],
+    "rules": {}
 }

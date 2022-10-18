@@ -8,7 +8,4 @@ const AuthCenterPublisherApiConfig = axios.create({
   baseURL: 'http://localhost:4000/api/posts/',
 });
 
-export {
-  AuthCenterSchoolsApiConfig,
-  AuthCenterPublisherApiConfig,
-};
+export { AuthCenterSchoolsApiConfig, AuthCenterPublisherApiConfig };

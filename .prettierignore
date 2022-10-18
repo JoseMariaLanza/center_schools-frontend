@@ -1,0 +1,13 @@
+
+# Post processed CSS
+app/styles
+# Caches
+.cache/
+
+# build outputs
+public
+build
+functions
+
+# binaries
+bin/

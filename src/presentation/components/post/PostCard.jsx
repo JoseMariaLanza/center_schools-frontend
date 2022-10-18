@@ -16,7 +16,8 @@ import Face from '@mui/icons-material/Face';
 import BookmarkBorderRoundedIcon from '@mui/icons-material/BookmarkBorderRounded';
 
 function PostCard() {
-  const linearGradient = '45deg #f09433 0% #e6683c 25% #dc2743 50% #cc2366 75% #bc1888 100%';
+  const linearGradient =
+    '45deg #f09433 0% #e6683c 25% #dc2743 50% #cc2366 75% #bc1888 100%';
   return (
     <Card
       variant="outlined"
@@ -25,9 +26,13 @@ function PostCard() {
         '--Card-radius': (theme) => theme.vars.radius.xs,
       }}
     >
-      <Box sx={{
-        display: 'flex', alignItems: 'center', pb: 1.5, gap: 1,
-      }}
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          pb: 1.5,
+          gap: 1,
+        }}
       >
         <Box
           sx={{
@@ -41,19 +46,27 @@ function PostCard() {
               right: 0,
               m: '-2px',
               borderRadius: '50%',
-              background:
-                `linear-gradient(${linearGradient})`,
+              background: `linear-gradient(${linearGradient})`,
             },
           }}
         >
           <Avatar
             size="sm"
             src="/static/logo.png"
-            sx={{ p: 0.5, border: '2px solid', borderColor: 'background.body' }}
+            sx={{
+              p: 0.5,
+              border: '2px solid',
+              borderColor: 'background.body',
+            }}
           />
         </Box>
         <Typography fontWeight="lg">MUI</Typography>
-        <IconButton variant="plain" color="neutral" size="sm" sx={{ ml: 'auto' }}>
+        <IconButton
+          variant="plain"
+          color="neutral"
+          size="sm"
+          sx={{ ml: 'auto' }}
+        >
           <MoreHoriz />
         </IconButton>
       </Box>
@@ -62,9 +75,13 @@ function PostCard() {
           <img src="/static/images/cards/yosemite.jpeg" alt="" />
         </AspectRatio>
       </CardOverflow>
-      <Box sx={{
-        display: 'flex', alignItems: 'center', mx: -1, my: 1,
-      }}
+      <Box
+        sx={{
+          display: 'flex',
+          alignItems: 'center',
+          mx: -1,
+          my: 1,
+        }}
       >
         <Box sx={{ width: 0, display: 'flex', gap: 0.5 }}>
           <IconButton variant="plain" color="neutral" size="sm">
@@ -77,9 +94,13 @@ function PostCard() {
             <SendOutlined />
           </IconButton>
         </Box>
-        <Box sx={{
-          display: 'flex', alignItems: 'center', gap: 0.5, mx: 'auto',
-        }}
+        <Box
+          sx={{
+            display: 'flex',
+            alignItems: 'center',
+            gap: 0.5,
+            mx: 'auto',
+          }}
         >
           {[...Array(5)].map((_, index) => (
             <Box
@@ -94,7 +115,13 @@ function PostCard() {
             />
           ))}
         </Box>
-        <Box sx={{ width: 0, display: 'flex', flexDirection: 'row-reverse' }}>
+        <Box
+          sx={{
+            width: 0,
+            display: 'flex',
+            flexDirection: 'row-reverse',
+          }}
+        >
           <IconButton variant="plain" color="neutral" size="sm">
             <BookmarkBorderRoundedIcon />
           </IconButton>
@@ -119,8 +146,7 @@ function PostCard() {
           textColor="text.primary"
         >
           MUI
-        </Link>
-        {' '}
+        </Link>{' '}
         The React component library you always wanted
       </Typography>
       <Link
@@ -150,7 +176,11 @@ function PostCard() {
           variant="plain"
           size="sm"
           placeholder="Add a comment…"
-          sx={{ flexGrow: 1, mr: 1, '--Input-focusedThickness': '0px' }}
+          sx={{
+            flexGrow: 1,
+            mr: 1,
+            '--Input-focusedThickness': '0px',
+          }}
         />
         <Link to="/#" disabled underline="none" role="button">
           Post

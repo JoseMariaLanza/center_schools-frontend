@@ -8,20 +8,16 @@ function DashBoard() {
 
   return (
     <Box sx={{ flexGrow: 0 }}>
-      {userPosts
-        ? (
-          <>
-            {
-              // eslint-disable-next-line no-underscore-dangle
-              userPosts.map((content) => <PostCard content={content} key={content._id} />)
-            }
-          </>
-        )
-        : (
-          <Typography textAlign="center">
-            You have not any post yet.
-          </Typography>
-        )}
+      {userPosts ? (
+        <>
+          {userPosts.map((content) => (
+            // eslint-disable-next-line no-underscore-dangle
+            <PostCard content={content} key={content._id} />
+          ))}
+        </>
+      ) : (
+        <Typography textAlign="center">You have not any post yet.</Typography>
+      )}
     </Box>
   );
 }

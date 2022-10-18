@@ -19,7 +19,4 @@ export const dashboardSlice = createSlice({
   },
 });
 
-export const {
-  startLoading,
-  setDashboardData,
-} = dashboardSlice.actions;
+export const { startLoading, setDashboardData } = dashboardSlice.actions;

@@ -12,15 +12,14 @@ function Home() {
   return (
     <div className="container">
       <div className="head__container">
-        <Slider sx={{
-          gridArea: '1 / 1 / 2 / 2',
-        }}
+        <Slider
+          sx={{
+            gridArea: '1 / 1 / 2 / 2',
+          }}
         />
         <div className="image__list">
           <ImageList />
-          <span>
-            view gallery
-          </span>
+          <span>view gallery</span>
         </div>
       </div>
       {/* <Banner />

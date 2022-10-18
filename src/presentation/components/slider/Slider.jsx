@@ -4,16 +4,15 @@ import Carousel from '../carousel/Carousel';
 
 function Slider() {
   return (
-    <Box sx={{
-      marginTop: '1rem',
-      flexGrow: 1,
-      width: '100%',
-      height: '100%',
-    }}
+    <Box
+      sx={{
+        marginTop: '1rem',
+        flexGrow: 1,
+        width: '100%',
+        height: '100%',
+      }}
     >
-
       <Carousel />
-
     </Box>
   );
 }

@@ -6,9 +6,7 @@ function Layout({ children }) {
   return (
     <>
       <ResponsiveAppBar />
-      <main>
-        {children}
-      </main>
+      <main>{children}</main>
     </>
   );
 }

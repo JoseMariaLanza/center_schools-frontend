@@ -92,114 +92,109 @@ export default function LoginDialog() {
 
   return (
     <div>
-      {!isLoggedIn
-        ? (
-          <>
-            <Button
-              id="login"
+      {!isLoggedIn ? (
+        <>
+          <Button
+            id="login"
+            sx={{
+              borderRadius: '100%',
+              color: '#4D4D4E',
+            }}
+            onClick={handleClickOpen}
+          >
+            <AccountCircleOutlinedIcon
               sx={{
+                fontSize: '3rem',
                 borderRadius: '100%',
-                color: '#4D4D4E',
+                color: 'inherit',
               }}
-              onClick={handleClickOpen}
-            >
-              <AccountCircleOutlinedIcon
-                sx={{
-                  fontSize: '3rem',
-                  borderRadius: '100%',
-                  color: 'inherit',
-                }}
-              />
-            </Button>
-            <Dialog open={open} onClose={handleClose}>
-              <form onSubmit={onSubmit}>
-                <DialogTitle>Login</DialogTitle>
-                <DialogContent>
-                  <DialogContentText>
-                    Login to view your school information.
-                  </DialogContentText>
+            />
+          </Button>
+          <Dialog open={open} onClose={handleClose}>
+            <form onSubmit={onSubmit}>
+              <DialogTitle>Login</DialogTitle>
+              <DialogContent>
+                <DialogContentText>
+                  Login to view your school information.
+                </DialogContentText>
 
-                  <InputForm
-                    messageError="Please type a valid email."
-                  >
-                    <TextField
-                      margin="dense"
-                      id="email"
-                      name="email"
-                      label="Email"
-                      type="email"
-                      placeholder="example@email.com"
-                      fullWidth
-                      variant="standard"
-                      required
-                      value={formState.email}
-                      onChange={onInputChange}
-                    />
-                  </InputForm>
+                <InputForm messageError="Please type a valid email.">
+                  <TextField
+                    margin="dense"
+                    id="email"
+                    name="email"
+                    label="Email"
+                    type="email"
+                    placeholder="example@email.com"
+                    fullWidth
+                    variant="standard"
+                    required
+                    value={formState.email}
+                    onChange={onInputChange}
+                  />
+                </InputForm>
 
-                  <InputForm>
-                    <TextField
-                      margin="dense"
-                      id="password"
-                      name="password"
-                      label="Password"
-                      type="password"
-                      placeholder="Write your password"
-                      fullWidth
-                      variant="standard"
-                      value={formState.password}
-                      required
-                      onChange={onInputChange}
-                    />
-                  </InputForm>
-
-                </DialogContent>
-                <DialogActions>
-                  <Button id="login-button" type="submit">Login</Button>
-                  <Button onClick={handleClose}>Cancel</Button>
-                </DialogActions>
-              </form>
-            </Dialog>
-          </>
-        )
-        : (
-          <Box sx={{ flexGrow: 0 }}>
-            <Tooltip title="Open settings">
-              <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
-              </IconButton>
-            </Tooltip>
-            <Menu
-              sx={{ mt: '45px' }}
-              id="menu-appbar"
-              anchorEl={anchorElUser}
-              anchorOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              keepMounted
-              transformOrigin={{
-                vertical: 'top',
-                horizontal: 'right',
-              }}
-              open={Boolean(anchorElUser)}
-              onClose={handleCloseUserMenu}
-            >
-              {settings.map((setting) => (
-                <MenuItem
-                  key={setting}
-                  component={NavLink}
-                  to={setting.toLowerCase()}
-                  onClick={() => handleClickMenuItem(setting)}
-                >
-                  <Typography textAlign="center">
-                    {setting}
-                  </Typography>
-                </MenuItem>
-              ))}
-            </Menu>
-          </Box>
-        )}
+                <InputForm>
+                  <TextField
+                    margin="dense"
+                    id="password"
+                    name="password"
+                    label="Password"
+                    type="password"
+                    placeholder="Write your password"
+                    fullWidth
+                    variant="standard"
+                    value={formState.password}
+                    required
+                    onChange={onInputChange}
+                  />
+                </InputForm>
+              </DialogContent>
+              <DialogActions>
+                <Button id="login-button" type="submit">
+                  Login
+                </Button>
+                <Button onClick={handleClose}>Cancel</Button>
+              </DialogActions>
+            </form>
+          </Dialog>
+        </>
+      ) : (
+        <Box sx={{ flexGrow: 0 }}>
+          <Tooltip title="Open settings">
+            <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
+              <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+            </IconButton>
+          </Tooltip>
+          <Menu
+            sx={{ mt: '45px' }}
+            id="menu-appbar"
+            anchorEl={anchorElUser}
+            anchorOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            keepMounted
+            transformOrigin={{
+              vertical: 'top',
+              horizontal: 'right',
+            }}
+            open={Boolean(anchorElUser)}
+            onClose={handleCloseUserMenu}
+          >
+            {settings.map((setting) => (
+              <MenuItem
+                key={setting}
+                component={NavLink}
+                to={setting.toLowerCase()}
+                onClick={() => handleClickMenuItem(setting)}
+              >
+                <Typography textAlign="center">{setting}</Typography>
+              </MenuItem>
+            ))}
+          </Menu>
+        </Box>
+      )}
     </div>
   );
 }

@@ -6,8 +6,14 @@ const register = (payload) => async (dispatch) => {
   dispatch(startLoading());
 
   try {
-    const { data } = await AuthCenterSchoolsApiConfig.post('user/create/', payload);
-    const { data: token } = await AuthCenterSchoolsApiConfig.post('user/token/', payload);
+    const { data } = await AuthCenterSchoolsApiConfig.post(
+      'user/create/',
+      payload
+    );
+    const { data: token } = await AuthCenterSchoolsApiConfig.post(
+      'user/token/',
+      payload
+    );
 
     dispatch(getUserToken({ token }));
 
@@ -30,7 +36,10 @@ const login = (payload) => async (dispatch) => {
   dispatch(startLoading());
 
   try {
-    const { data } = await AuthCenterSchoolsApiConfig.post('user/token/', payload);
+    const { data } = await AuthCenterSchoolsApiConfig.post(
+      'user/token/',
+      payload
+    );
 
     dispatch(getUserToken(data));
 
@@ -88,9 +97,4 @@ const logout = (payload) => async (dispatch) => {
   }
 };
 
-export {
-  register,
-  login,
-  profile,
-  logout,
-};
+export { register, login, profile, logout };

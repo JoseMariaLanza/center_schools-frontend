@@ -1,7 +1,7 @@
-const { defineConfig } = require("cypress");
+const { defineConfig } = require('cypress');
 
 module.exports = defineConfig({
-  projectId: "ftiw9v",
+  projectId: 'ftiw9v',
 
   e2e: {
     setupNodeEvents(on, config) {
@@ -11,8 +11,8 @@ module.exports = defineConfig({
 
   component: {
     devServer: {
-      framework: "react",
-      bundler: "webpack",
+      framework: 'react',
+      bundler: 'webpack',
     },
   },
 });

@@ -7,11 +7,7 @@ import fieldsValidator from '../../../validation/validators/fieldsValidator';
 
 function InputForm({ children, messageError }) {
   const { error, setError } = useForm();
-  const {
-    value,
-    required,
-    validate,
-  } = children.props;
+  const { value, required, validate } = children.props;
 
   useEffect(() => {
     if (value !== '') setError(false);
@@ -24,11 +20,7 @@ function InputForm({ children, messageError }) {
 
   return (
     <FormGroup>
-      <FormControl
-        autoFocus
-        required={required}
-        onBlur={handleError}
-      >
+      <FormControl autoFocus required={required} onBlur={handleError}>
         {children}
       </FormControl>
       {error && <span className="text-danger">{messageError}</span>}

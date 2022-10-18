@@ -70,9 +70,12 @@ function ResponsiveAppBar() {
     <AppBar theme={theme} position="static">
       <Container maxWidth="xl">
         <Toolbar disableGutters>
-          <Icon sx={{
-            display: { xs: 'none', md: 'flex' }, mr: 1, fontSize: '3rem',
-          }}
+          <Icon
+            sx={{
+              display: { xs: 'none', md: 'flex' },
+              mr: 1,
+              fontSize: '3rem',
+            }}
           >
             <img src={logo} alt="I.T.F." />
           </Icon>
@@ -94,7 +97,12 @@ function ResponsiveAppBar() {
             Asociación de Escuelas Center de TaeKwon-Do
           </Typography>
 
-          <Box sx={{ flexGrow: 1, display: { xs: 'flex', md: 'none' } }}>
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: 'flex', md: 'none' },
+            }}
+          >
             <IconButton
               size="large"
               aria-label="account of current user"
@@ -131,7 +139,13 @@ function ResponsiveAppBar() {
             </Menu>
           </Box>
           {/* <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} /> */}
-          <Icon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1, fontSize: '3rem' }}>
+          <Icon
+            sx={{
+              display: { xs: 'flex', md: 'none' },
+              mr: 1,
+              fontSize: '3rem',
+            }}
+          >
             <img src={logo} alt="I.T.F." />
           </Icon>
           <Typography
@@ -152,10 +166,11 @@ function ResponsiveAppBar() {
           >
             A.E.C
           </Typography>
-          <Box sx={{
-            flexGrow: 1,
-            display: { xs: 'none', md: 'flex' },
-          }}
+          <Box
+            sx={{
+              flexGrow: 1,
+              display: { xs: 'none', md: 'flex' },
+            }}
           >
             {pages.map((page) => (
               <Button

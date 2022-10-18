@@ -1,9 +1,9 @@
 .head__container {
-    display: grid;
-    grid-template-columns: 0.7fr 0.3fr;
-    grid-template-rows: 1fr;
-    grid-column-gap: 10px;
-    width: 100%;
-    height: fit-content;
-    /* padding-left: 10vw; */
+  display: grid;
+  grid-template-columns: 0.7fr 0.3fr;
+  grid-template-rows: 1fr;
+  grid-column-gap: 10px;
+  width: 100%;
+  height: fit-content;
+  /* padding-left: 10vw; */
 }

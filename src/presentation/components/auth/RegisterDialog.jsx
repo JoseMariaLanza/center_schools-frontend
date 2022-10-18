@@ -46,29 +46,24 @@ export default function Auth() {
 
   return (
     <>
-      <Button
-        id="register"
-        sx={{ color: '#4D4D4E' }}
-        onClick={handleClickOpen}
-      >
+      <Button id="register" sx={{ color: '#4D4D4E' }} onClick={handleClickOpen}>
         Register
       </Button>
       <Dialog open={open} onClose={handleClose}>
         <form onSubmit={onSubmit}>
           <DialogTitle>Register</DialogTitle>
           <DialogContent>
-            <DialogContentText>
-              Create an account.
-            </DialogContentText>
+            <DialogContentText>Create an account.</DialogContentText>
 
-            <InputForm
-              messageError="Please type a user name."
-            >
+            <InputForm messageError="Please type a user name.">
               <TextField
                 margin="dense"
                 id="username"
                 name="username"
-                validate={{ type: 'username', value: formState.username }}
+                validate={{
+                  type: 'username',
+                  value: formState.username,
+                }}
                 label="User name"
                 placeholder="JoseMariaLanza"
                 fullWidth
@@ -79,14 +74,15 @@ export default function Auth() {
               />
             </InputForm>
 
-            <InputForm
-              messageError="Please type a valid email."
-            >
+            <InputForm messageError="Please type a valid email.">
               <TextField
                 margin="dense"
                 id="email"
                 name="email"
-                validate={{ type: 'email', value: formState.email }}
+                validate={{
+                  type: 'email',
+                  value: formState.email,
+                }}
                 label="Email"
                 type="email"
                 placeholder="example@email.com"
@@ -98,14 +94,15 @@ export default function Auth() {
               />
             </InputForm>
 
-            <InputForm
-              messageError="Please type your password."
-            >
+            <InputForm messageError="Please type your password.">
               <TextField
                 margin="dense"
                 id="password"
                 name="password"
-                validate={{ type: 'length', value: formState.password }}
+                validate={{
+                  type: 'length',
+                  value: formState.password,
+                }}
                 label="Password"
                 type="password"
                 placeholder="Write your password"
@@ -117,9 +114,7 @@ export default function Auth() {
               />
             </InputForm>
 
-            <InputForm
-              messageError="Please repeat your password"
-            >
+            <InputForm messageError="Please repeat your password">
               <TextField
                 margin="dense"
                 id="passwordConfirmation"
@@ -139,10 +134,11 @@ export default function Auth() {
                 required
               />
             </InputForm>
-
           </DialogContent>
           <DialogActions>
-            <Button id="login-button" type="submit">Register</Button>
+            <Button id="login-button" type="submit">
+              Register
+            </Button>
             <Button onClick={handleClose}>Close</Button>
           </DialogActions>
         </form>

@@ -14,8 +14,11 @@ import { createTheme } from '@mui/material/styles';
 
 import { NavLink } from 'react-router-dom';
 import { Icon } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 import logo from '../assets/images/logos/logoITF.png';
 import Auth from './auth/Auth';
+
+import '../lang/i18n';
 
 const pages = [
   {
@@ -41,6 +44,7 @@ const pages = [
 ];
 
 function ResponsiveAppBar() {
+  const { t, i18n } = useTranslation();
   const [anchorElNav, setAnchorElNav] = useState(null);
 
   const handleOpenNavMenu = (event) => {
@@ -184,11 +188,31 @@ function ResponsiveAppBar() {
                   borderRadius: 0,
                 })}
               >
-                {page.text}
+                {t(page.text.toString().toLowerCase())}
               </Button>
             ))}
           </Box>
-          <Auth />
+          <>
+            <div className="col-md-8 offset-md-2">
+              <button
+                type="button"
+                className="btn btn-secondary"
+                onClick={() => i18n.changeLanguage('es')}
+                disabled={i18n.language === 'es'}
+              >
+                {t('change_language_es')}
+              </button>
+              <button
+                type="button"
+                className="btn btn-primary ml-2"
+                onClick={() => i18n.changeLanguage('en')}
+                disabled={i18n.language === 'en'}
+              >
+                {t('change_language_en')}
+              </button>
+            </div>
+            <Auth />
+          </>
         </Toolbar>
       </Container>
     </AppBar>

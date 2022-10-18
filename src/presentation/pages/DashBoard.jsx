@@ -10,12 +10,10 @@ function DashBoard() {
     <Box sx={{ flexGrow: 0 }}>
       {userPosts ? (
         <>
-          {
+          {userPosts.map((content) => (
             // eslint-disable-next-line no-underscore-dangle
-            userPosts.map((content) => (
-              <PostCard content={content} key={content._id} />
-            ))
-          }
+            <PostCard content={content} key={content._id} />
+          ))}
         </>
       ) : (
         <Typography textAlign="center">You have not any post yet.</Typography>

@@ -9,8 +9,8 @@ import DialogTitle from '@mui/material/DialogTitle';
 import Slide from '@mui/material/Slide';
 import Box from '@mui/material/Box';
 
-// eslint-disable-next-line react/jsx-props-no-spreading
 const Transition = React.forwardRef((props, ref) => (
+  // eslint-disable-next-line react/jsx-props-no-spreading
   <Slide direction="up" ref={ref} {...props} />
 ));
 

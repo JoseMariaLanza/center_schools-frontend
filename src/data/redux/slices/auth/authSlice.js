@@ -47,9 +47,5 @@ export const authSlice = createSlice({
   },
 });
 
-export const {
-  startLoading,
-  getUserToken,
-  getUserProfile,
-  logout,
-} = authSlice.actions;
+export const { startLoading, getUserToken, getUserProfile, logout } =
+  authSlice.actions;

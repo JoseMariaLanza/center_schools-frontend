@@ -20,25 +20,29 @@ const AutoPlaySwipeableViews = autoPlay(SwipeableViews);
 const images = [
   {
     title: 'Sudamericano 1995 - Brasil',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin gravida volutpat mauris eu eleifend. Donec sit amet lobortis est. Etiam sit amet mi sit amet elit vestibulum hendrerit. Duis at tellus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam sodales sed diam in iaculis. Nulla facilisi.',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin gravida volutpat mauris eu eleifend. Donec sit amet lobortis est. Etiam sit amet mi sit amet elit vestibulum hendrerit. Duis at tellus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam sodales sed diam in iaculis. Nulla facilisi.',
     imgPath:
       'https://images.unsplash.com/photo-1537944434965-cf4679d1a598?auto=format&fit=crop&w=400&h=250&q=60',
   },
   {
-    title: 'Mundial \'92 - Croacia',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin gravida volutpat mauris eu eleifend. Donec sit amet lobortis est. Etiam sit amet mi sit amet elit vestibulum hendrerit. Duis at tellus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam sodales sed diam in iaculis. Nulla facilisi.',
+    title: "Mundial '92 - Croacia",
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin gravida volutpat mauris eu eleifend. Donec sit amet lobortis est. Etiam sit amet mi sit amet elit vestibulum hendrerit. Duis at tellus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam sodales sed diam in iaculis. Nulla facilisi.',
     imgPath:
       'https://images.unsplash.com/photo-1538032746644-0212e812a9e7?auto=format&fit=crop&w=400&h=250&q=60',
   },
   {
     title: 'Bali, Indonesia',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin gravida volutpat mauris eu eleifend. Donec sit amet lobortis est. Etiam sit amet mi sit amet elit vestibulum hendrerit. Duis at tellus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam sodales sed diam in iaculis. Nulla facilisi.',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin gravida volutpat mauris eu eleifend. Donec sit amet lobortis est. Etiam sit amet mi sit amet elit vestibulum hendrerit. Duis at tellus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam sodales sed diam in iaculis. Nulla facilisi.',
     imgPath:
       'https://images.unsplash.com/photo-1537996194471-e657df975ab4?auto=format&fit=crop&w=400&h=250',
   },
   {
     title: 'Goč, Serbia',
-    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin gravida volutpat mauris eu eleifend. Donec sit amet lobortis est. Etiam sit amet mi sit amet elit vestibulum hendrerit. Duis at tellus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam sodales sed diam in iaculis. Nulla facilisi.',
+    description:
+      'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin gravida volutpat mauris eu eleifend. Donec sit amet lobortis est. Etiam sit amet mi sit amet elit vestibulum hendrerit. Duis at tellus diam. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Aliquam sodales sed diam in iaculis. Nulla facilisi.',
     imgPath:
       'https://images.unsplash.com/photo-1512341689857-198e7e2f3ca8?auto=format&fit=crop&w=400&h=250&q=60',
   },
@@ -97,31 +101,29 @@ function SwipeableTextMobileStepper() {
                 <ImageListItemBar
                   title={step.title}
                   subtitle={step.description}
-                  actionIcon={(
+                  actionIcon={
                     <IconButton
-                      sx={{ color: 'rgba(255, 255, 255, 0.54)' }}
+                      sx={{
+                        color: 'rgba(255, 255, 255, 0.54)',
+                      }}
                       aria-label={`info about ${step.title}`}
                       onClick={() => handleClickOpen(step)}
                     >
                       <InfoIcon />
                     </IconButton>
-                  )}
+                  }
                 />
               </Box>
             ) : null}
           </ImageListItem>
         ))}
       </AutoPlaySwipeableViews>
-      <AlertDialogSlide
-        info={info}
-        open={open}
-        setOpen={setOpen}
-      />
+      <AlertDialogSlide info={info} open={open} setOpen={setOpen} />
       <MobileStepper
         steps={maxSteps}
         position="static"
         activeStep={activeStep}
-        nextButton={(
+        nextButton={
           <Button
             size="small"
             onClick={handleNext}
@@ -134,8 +136,8 @@ function SwipeableTextMobileStepper() {
               <KeyboardArrowRight />
             )}
           </Button>
-        )}
-        backButton={(
+        }
+        backButton={
           <Button size="small" onClick={handleBack} disabled={activeStep === 0}>
             {theme.direction === 'rtl' ? (
               <KeyboardArrowRight />
@@ -144,7 +146,7 @@ function SwipeableTextMobileStepper() {
             )}
             Back
           </Button>
-        )}
+        }
       />
     </Box>
   );

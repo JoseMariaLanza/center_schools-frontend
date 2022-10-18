@@ -63,9 +63,7 @@ export default function Auth() {
               Login to view your school information.
             </DialogContentText>
 
-            <InputForm
-              messageError="Please type a valid email."
-            >
+            <InputForm messageError="Please type a valid email.">
               <TextField
                 margin="dense"
                 id="email"
@@ -82,9 +80,7 @@ export default function Auth() {
               />
             </InputForm>
 
-            <InputForm
-              messageError="Please type your password."
-            >
+            <InputForm messageError="Please type your password.">
               <TextField
                 margin="dense"
                 id="password"
@@ -100,10 +96,11 @@ export default function Auth() {
                 required
               />
             </InputForm>
-
           </DialogContent>
           <DialogActions>
-            <Button id="login-button" type="submit">Login</Button>
+            <Button id="login-button" type="submit">
+              Login
+            </Button>
             <Button onClick={handleClose}>Close</Button>
           </DialogActions>
         </form>

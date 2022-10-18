@@ -14,17 +14,24 @@ const persistPublisherConfig = {
   storage,
 };
 
-const persistedAuthReducer = persistReducer(persistAuthConfig, authSlice.reducer);
-const persistedPublisherReducer = persistReducer(persistPublisherConfig, dashboardSlice.reducer);
+const persistedAuthReducer = persistReducer(
+  persistAuthConfig,
+  authSlice.reducer
+);
+const persistedPublisherReducer = persistReducer(
+  persistPublisherConfig,
+  dashboardSlice.reducer
+);
 
 export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
     dashboard: persistedPublisherReducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware({
-    serializableCheck: false,
-  }),
+  middleware: (getDefaultMiddleware) =>
+    getDefaultMiddleware({
+      serializableCheck: false,
+    }),
 });
 
 export const persistor = persistStore(store);

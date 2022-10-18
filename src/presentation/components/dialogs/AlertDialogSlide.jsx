@@ -10,7 +10,9 @@ import Slide from '@mui/material/Slide';
 import Box from '@mui/material/Box';
 
 // eslint-disable-next-line react/jsx-props-no-spreading
-const Transition = React.forwardRef((props, ref) => <Slide direction="up" ref={ref} {...props} />);
+const Transition = React.forwardRef((props, ref) => (
+  <Slide direction="up" ref={ref} {...props} />
+));
 
 export default function AlertDialogSlide({ info, open, setOpen }) {
   const { title, description, imgPath } = info;

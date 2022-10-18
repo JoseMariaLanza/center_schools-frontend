@@ -1,5 +1,8 @@
 import { AuthCenterPublisherApiConfig } from '../../../authApiConfigs';
-import { startLoading as startLoadingPosts, setUserPosts } from '../publisher/postSlice';
+import {
+  startLoading as startLoadingPosts,
+  setUserPosts,
+} from '../publisher/postSlice';
 import { getUserProfile } from '../auth/authSlice';
 import { startLoading, setDashboardData } from './dashboardSlice';
 

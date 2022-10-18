@@ -35,8 +35,4 @@ export const postSlice = createSlice({
   },
 });
 
-export const {
-  startLoading,
-  setUserPosts,
-  clearPosts,
-} = postSlice.actions;
+export const { startLoading, setUserPosts, clearPosts } = postSlice.actions;

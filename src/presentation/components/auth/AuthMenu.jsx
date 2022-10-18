@@ -76,9 +76,7 @@ function AuthMenu() {
             to={setting.toLowerCase()}
             onClick={() => handleClickMenuItem(setting)}
           >
-            <Typography textAlign="center">
-              {setting}
-            </Typography>
+            <Typography textAlign="center">{setting}</Typography>
           </MenuItem>
         ))}
       </Menu>

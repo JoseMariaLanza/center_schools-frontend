@@ -20,13 +20,14 @@ export default function Auth() {
 
   return (
     <div>
-      {!isLoggedIn
-        ? (
-          <>
-            <RegisterDialog />
-            <LoginDialog />
-          </>
-        ) : <AuthMenu />}
+      {!isLoggedIn ? (
+        <>
+          <RegisterDialog />
+          <LoginDialog />
+        </>
+      ) : (
+        <AuthMenu />
+      )}
     </div>
   );
 }

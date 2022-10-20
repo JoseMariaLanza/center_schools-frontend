@@ -71,7 +71,10 @@ export default function Auth() {
                 margin="dense"
                 id="email"
                 name="email"
-                validate="email"
+                validate={{
+                  type: 'email',
+                  value: formState.email,
+                }}
                 label="Email"
                 type="email"
                 placeholder="example@email.com"
@@ -88,7 +91,10 @@ export default function Auth() {
                 margin="dense"
                 id="password"
                 name="password"
-                validate="length"
+                validate={{
+                  type: 'length',
+                  value: formState.password,
+                }}
                 label="Password"
                 type="password"
                 placeholder="Write your password"

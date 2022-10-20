@@ -16,11 +16,11 @@ const persistPublisherConfig = {
 
 const persistedAuthReducer = persistReducer(
   persistAuthConfig,
-  authSlice.reducer
+  authSlice.reducer,
 );
 const persistedPublisherReducer = persistReducer(
   persistPublisherConfig,
-  dashboardSlice.reducer
+  dashboardSlice.reducer,
 );
 
 export const store = configureStore({

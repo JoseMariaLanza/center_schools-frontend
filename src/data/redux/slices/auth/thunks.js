@@ -8,11 +8,11 @@ const register = (payload) => async (dispatch) => {
   try {
     const { data } = await AuthCenterSchoolsApiConfig.post(
       'user/create/',
-      payload
+      payload,
     );
     const { data: token } = await AuthCenterSchoolsApiConfig.post(
       'user/token/',
-      payload
+      payload,
     );
 
     dispatch(getUserToken({ token }));
@@ -38,7 +38,7 @@ const login = (payload) => async (dispatch) => {
   try {
     const { data } = await AuthCenterSchoolsApiConfig.post(
       'user/token/',
-      payload
+      payload,
     );
 
     dispatch(getUserToken(data));

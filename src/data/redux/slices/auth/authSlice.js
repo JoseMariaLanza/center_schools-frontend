@@ -1,22 +1,11 @@
 /* eslint-disable no-param-reassign */
 import { createSlice } from '@reduxjs/toolkit';
 
-// const userToken = JSON.parse(sessionStorage.getItem('session'));
-
-// const initialState = userToken ?
-//     userToken :
-//     {
-//         token: '',
-//         isLoggedIn: false,
-//         isLoading: false,
-//         userData: null
-//     };
-
 const initialState = {
-  token: '',
-  isLoggedIn: false,
-  isLoading: false,
-  userData: null,
+  status: 'unauthenticated',
+  ok: null,
+  message: null,
+  data: null,
 };
 
 export const authSlice = createSlice({
@@ -24,28 +13,25 @@ export const authSlice = createSlice({
   initialState,
   reducers: {
     startLoading: (state) => {
-      state.isLoading = true;
+      state.status = 'loading';
     },
-    getUserToken: (state, action) => {
-      state.isLoading = false;
-      state.token = action.payload.token;
-      state.isLoggedIn = true;
-      // sessionStorage.setItem('session', JSON.stringify(state));
+    setAuth: (state, action) => {
+      state.status = 'authenticated';
+      state.ok = action.payload.ok;
+      state.message = action.payload.message;
+      state.data = action.payload.data;
     },
-    getUserProfile: (state, action) => {
-      state.isLoading = false;
-      state.userData = action.payload;
-    },
-    logout: (state) => {
-      state.isLoading = false;
-      state.isLoggedIn = false;
-      state.token = '';
-      state.userData = null;
-      // state = initialState;
-      // console.log(action);
+    // getUserProfile: (state, action) => {
+    //   state.data = action.payload.data;
+    // },
+    clear: (state) => {
+      state.status = 'unauthenticated';
+      state.ok = null;
+      state.message = null;
+      state.data = null;
     },
   },
 });
 
-export const { startLoading, getUserToken, getUserProfile, logout } =
+export const { startLoading, setAuth, getUserProfile, clear } =
   authSlice.actions;

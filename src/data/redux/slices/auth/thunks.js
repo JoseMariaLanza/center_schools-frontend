@@ -1,6 +1,10 @@
-import { AuthCenterSchoolsApiConfig } from '../../../authApiConfigs';
-import { startLoading, getUserToken, getUserProfile } from './authSlice';
+import {
+  AuthCenterSchoolsApiConfig,
+  CenterPublisherPublicApiPost,
+} from '../../../apiConfigs';
+import { startLoading, setAuth, getUserProfile, clear } from './authSlice';
 import { clearPosts } from '../publisher/postSlice';
+import { handleError } from '../errorHandlerSlice';
 
 const register = (payload) => async (dispatch) => {
   dispatch(startLoading());
@@ -15,20 +19,22 @@ const register = (payload) => async (dispatch) => {
       payload,
     );
 
-    dispatch(getUserToken({ token }));
+    dispatch(setAuth({ token }));
 
-    const userData = await AuthCenterSchoolsApiConfig.get('user/profile/', {
+    const res = await AuthCenterSchoolsApiConfig.get('user/profile/', {
       headers: {
         Authorization: `Token ${data.token}`,
       },
     });
 
-    if (userData) {
-      dispatch(getUserProfile(userData.data));
+    if (res.status === 201) {
+      dispatch(getUserProfile(res.data));
+    } else {
+      dispatch(handleError(res.response.data));
+      dispatch(clear());
     }
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log(error);
+  } catch ({ response }) {
+    dispatch(handleError(response.data));
   }
 };
 
@@ -36,25 +42,17 @@ const login = (payload) => async (dispatch) => {
   dispatch(startLoading());
 
   try {
-    const { data } = await AuthCenterSchoolsApiConfig.post(
-      'user/token/',
-      payload,
-    );
+    const res = await CenterPublisherPublicApiPost('/auth', payload);
 
-    dispatch(getUserToken(data));
-
-    const userData = await AuthCenterSchoolsApiConfig.get('user/profile/', {
-      headers: {
-        Authorization: `Token ${data.token}`,
-      },
-    });
-
-    if (userData) {
-      dispatch(getUserProfile(userData.data));
+    if (res.status === 200) {
+      dispatch(setAuth(res.data));
+    } else {
+      dispatch(handleError(res.response.data));
+      dispatch(clear());
     }
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log(error);
+  } catch ({ response }) {
+    dispatch(handleError(response.data));
+    dispatch(clear());
   }
 };
 
@@ -62,18 +60,19 @@ const profile = (payload) => async (dispatch) => {
   dispatch(startLoading());
 
   try {
-    const { data } = await AuthCenterSchoolsApiConfig.get('user/profile/', {
+    const res = await AuthCenterSchoolsApiConfig.get('user/profile/', {
       headers: {
         Authorization: `Token ${payload}`,
       },
     });
 
-    if (data) {
-      dispatch(getUserProfile(data));
+    if (res.status === 200) {
+      dispatch(getUserProfile(res.data));
+    } else {
+      dispatch(handleError(res.response.data));
     }
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log(error);
+  } catch ({ response }) {
+    dispatch(handleError(response.data));
   }
 };
 
@@ -81,19 +80,19 @@ const logout = (payload) => async (dispatch) => {
   dispatch(startLoading());
 
   try {
-    const { data } = await AuthCenterSchoolsApiConfig.get('user/logout/', {
+    const res = await AuthCenterSchoolsApiConfig.get('user/logout/', {
       headers: {
         Authorization: `Token ${payload}`,
       },
     });
 
-    if (data) {
-      dispatch(logout(data));
-      dispatch(clearPosts());
+    if (res.status !== 200) {
+      dispatch(handleError(res.response.data));
     }
-  } catch (error) {
-    // eslint-disable-next-line no-console
-    console.log(error);
+    dispatch(clear());
+    dispatch(clearPosts());
+  } catch ({ response }) {
+    dispatch(handleError(response.data));
   }
 };
 

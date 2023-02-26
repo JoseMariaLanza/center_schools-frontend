@@ -9,9 +9,8 @@ import Tooltip from '@mui/material/Tooltip';
 import Avatar from '@mui/material/Avatar';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { profile } from '../../../data/redux/slices/auth/thunks';
+import { profile, logout } from '../../../data/redux/slices/auth/thunks';
 import dashboard from '../../../data/redux/slices/dashboard/thunks';
-import { logout } from '../../../data/redux/slices/auth/authSlice';
 
 const settings = ['Profile', 'Account', 'Dashboard', 'Logout'];
 

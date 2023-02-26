@@ -1,4 +1,4 @@
-import { AuthCenterPublisherApiConfig } from '../../../authApiConfigs';
+import { CenterPublisherApiConfig } from '../../../apiConfigs';
 import {
   startLoading as startLoadingPosts,
   setUserPosts,
@@ -15,11 +15,10 @@ const dashboard = (payload) => async (dispatch, getState) => {
     const { userData } = auth;
     const { user: userId } = userData;
 
-    const { data } = await AuthCenterPublisherApiConfig.get(`/${userId}`, {
-      headers: {
-        Authorization: `Token ${payload}`,
-      },
-    });
+    const { data } = await CenterPublisherApiConfig.get(
+      `/posts/${userId}`,
+      payload,
+    );
 
     if (data) {
       dispatch(setUserPosts(data));

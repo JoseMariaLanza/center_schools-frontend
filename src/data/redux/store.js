@@ -3,6 +3,8 @@ import storage from 'redux-persist/lib/storage';
 import { persistStore, persistReducer } from 'redux-persist';
 import { authSlice } from './slices/auth/authSlice';
 import { dashboardSlice } from './slices/dashboard/dashboardSlice';
+import { errorHandlerSlice } from './slices/errorHandlerSlice';
+import { userSlice } from './slices/auth/userSlice';
 
 const persistAuthConfig = {
   key: 'auth',
@@ -27,6 +29,8 @@ export const store = configureStore({
   reducer: {
     auth: persistedAuthReducer,
     dashboard: persistedPublisherReducer,
+    user: userSlice.reducer,
+    error: errorHandlerSlice.reducer,
   },
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({

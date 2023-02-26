@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 import Dialog from '@mui/material/Dialog';
@@ -8,14 +8,17 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import AccountCircleOutlinedIcon from '@mui/icons-material/AccountCircleOutlined';
 
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 // import { useTranslation } from 'react-i18next';
+import { useJwt } from 'react-jwt';
 import useForm from '../../hooks/useForm';
-import { login } from '../../../data/redux/slices/auth/thunks';
+import { getUserData, login } from '../../../data/redux/slices/auth/thunks';
 import InputForm from '../input/InputForm';
 
 export default function Auth() {
+  const { auth } = useSelector((state) => state);
   // const { t, i18n } = useTranslation();
+  const { decodedToken } = useJwt(auth.data);
 
   const { onInputChange, formState } = useForm({
     email: '',
@@ -30,11 +33,15 @@ export default function Auth() {
     setOpen(true);
   };
 
-  const onSubmit = (event) => {
+  const onSubmit = async (event) => {
     event.preventDefault();
-    dispatch(login(formState));
+    await dispatch(login(formState));
     setOpen(false);
   };
+
+  useEffect(() => {
+    dispatch(getUserData(decodedToken));
+  }, [decodedToken]);
 
   const handleClose = () => {
     setOpen(false);

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import jwt from 'jsonwebtoken';
+// import jwt from 'jsonwebtoken';
 
 const AuthCenterSchoolsApiConfig = axios.create({
   baseURL: 'http://localhost:8000/api/1.1',
@@ -24,11 +24,12 @@ const CenterPublisherApiConfig = (token) => {
 
 const CenterPublisherPublicApiPost = async (route, payload) => {
   try {
-    const encodedPayload = jwt.sign(payload, process.env.REACT_APP_JWT_KEY);
+    // const encodedPayload = jwt.sign(payload, process.env.REACT_APP_JWT_KEY);
 
-    const res = await CenterPublisherPublicApiConfig.post(route, {
-      token: encodedPayload,
-    });
+    const res = await CenterPublisherPublicApiConfig.post(route, payload);
+    // {
+    //   token: encodedPayload,
+    // });
     return res;
   } catch (error) {
     return error;
@@ -37,10 +38,11 @@ const CenterPublisherPublicApiPost = async (route, payload) => {
 
 const CenterPublisherApiPost = async (route, payload) => {
   try {
-    const encodedPayload = jwt.sign(payload, process.env.REACT_APP_JWT_KEY);
+    // const encodedPayload = jwt.sign(payload, process.env.REACT_APP_JWT_KEY);
 
     const res = await CenterPublisherApiConfig.post(route, {
-      token: encodedPayload,
+      payload,
+      // token: encodedPayload,
     });
     return res;
   } catch (error) {

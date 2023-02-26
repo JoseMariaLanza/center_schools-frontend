@@ -5,9 +5,10 @@ import {
 import { startLoading, setAuth, getUserProfile, clear } from './authSlice';
 import { clearPosts } from '../publisher/postSlice';
 import { handleError } from '../errorHandlerSlice';
+import { noUserData, retrieveUserData } from './userSlice';
 
 const register = (payload) => async (dispatch) => {
-  dispatch(startLoading());
+  await dispatch(startLoading());
 
   try {
     const { data } = await AuthCenterSchoolsApiConfig.post(
@@ -19,7 +20,7 @@ const register = (payload) => async (dispatch) => {
       payload,
     );
 
-    dispatch(setAuth({ token }));
+    await dispatch(setAuth({ token }));
 
     const res = await AuthCenterSchoolsApiConfig.get('user/profile/', {
       headers: {
@@ -28,18 +29,18 @@ const register = (payload) => async (dispatch) => {
     });
 
     if (res.status === 201) {
-      dispatch(getUserProfile(res.data));
+      await dispatch(getUserProfile(res.data));
     } else {
-      dispatch(handleError(res.response.data));
-      dispatch(clear());
+      await dispatch(handleError(res.response.data));
+      await dispatch(clear());
     }
   } catch ({ response }) {
-    dispatch(handleError(response.data));
+    await dispatch(handleError(response.data));
   }
 };
 
 const login = (payload) => async (dispatch) => {
-  dispatch(startLoading());
+  await dispatch(startLoading());
 
   try {
     const res = await CenterPublisherPublicApiPost('/auth', payload);
@@ -47,17 +48,17 @@ const login = (payload) => async (dispatch) => {
     if (res.status === 200) {
       dispatch(setAuth(res.data));
     } else {
-      dispatch(handleError(res.response.data));
-      dispatch(clear());
+      await dispatch(handleError(res.response.data));
+      await dispatch(clear());
     }
   } catch ({ response }) {
-    dispatch(handleError(response.data));
-    dispatch(clear());
+    await dispatch(handleError(response.data));
+    await dispatch(clear());
   }
 };
 
 const profile = (payload) => async (dispatch) => {
-  dispatch(startLoading());
+  await dispatch(startLoading());
 
   try {
     const res = await AuthCenterSchoolsApiConfig.get('user/profile/', {
@@ -67,9 +68,9 @@ const profile = (payload) => async (dispatch) => {
     });
 
     if (res.status === 200) {
-      dispatch(getUserProfile(res.data));
+      await dispatch(getUserProfile(res.data));
     } else {
-      dispatch(handleError(res.response.data));
+      await dispatch(handleError(res.response.data));
     }
   } catch ({ response }) {
     dispatch(handleError(response.data));
@@ -77,7 +78,7 @@ const profile = (payload) => async (dispatch) => {
 };
 
 const logout = (payload) => async (dispatch) => {
-  dispatch(startLoading());
+  await dispatch(startLoading());
 
   try {
     const res = await AuthCenterSchoolsApiConfig.get('user/logout/', {
@@ -87,13 +88,23 @@ const logout = (payload) => async (dispatch) => {
     });
 
     if (res.status !== 200) {
-      dispatch(handleError(res.response.data));
+      await dispatch(handleError(res.response.data));
     }
-    dispatch(clear());
-    dispatch(clearPosts());
+    await dispatch(clear());
+    await dispatch(clearPosts());
   } catch ({ response }) {
-    dispatch(handleError(response.data));
+    await dispatch(handleError(response.data));
   }
 };
 
-export { register, login, profile, logout };
+const getUserData = (authdata) => async (dispatch) => {
+  try {
+    console.log('AUTHDATA IN GET USER DATA: ', authdata);
+    await dispatch(retrieveUserData(authdata));
+  } catch (error) {
+    console.log('ERROR GETING USER DATA: ', error);
+    await dispatch(noUserData(error.response));
+  }
+};
+
+export { register, login, getUserData, profile, logout };
